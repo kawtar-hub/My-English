@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Quest</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:linear-gradient(135deg,#f5efff,#eee7ff,#f9f4ff);
+color:#29233d;min-height:100vh
+}
+button{font:inherit;border:0;cursor:pointer}
+.app{max-width:1100px;margin:auto;padding:20px}
+header{
+display:flex;justify-content:space-between;align-items:center;
+padding:18px 4px 25px
+}
+.logo{font-size:25px;font-weight:800;color:#7047d9}
+.logo span{font-size:29px}
+.stats{display:flex;gap:10px}
+.stat{
+background:white;padding:9px 13px;border-radius:15px;
+box-shadow:0 5px 18px #6d4ac01a;font-weight:700;font-size:14px
+}
+.hero{
+background:linear-gradient(135deg,#7650dc,#a276f3);
+color:white;border-radius:28px;padding:30px;
+box-shadow:0 15px 35px #7047d933;margin-bottom:25px
+}
+.hero h1{font-size:32px;margin-bottom:8px}
+.hero p{opacity:.9;margin-bottom:20px}
+.progress{height:10px;background:#ffffff3b;border-radius:20px;overflow:hidden}
+.progress div{height:100%;background:white;border-radius:20px;width:42%}
+.grid{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:15px
+}
+.card{
+background:#fff;border-radius:23px;padding:22px;
+box-shadow:0 8px 25px #5d3ba015;
+transition:.2s;border:1px solid #ffffff
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px #5d3ba022}
+.icon{font-size:35px;margin-bottom:12px}
+.card h3{margin-bottom:7px}
+.card p{font-size:14px;color:#817a91;line-height:1.5}
+.xp{
+display:inline-block;margin-top:15px;background:#f0eaff;
+color:#7047d9;padding:7px 10px;border-radius:12px;font-size:12px;font-weight:800
+}
+section{display:none}
+section.active{display:block}
+.back{
+background:white;color:#7047d9;padding:10px 15px;border-radius:13px;
+font-weight:700;margin-bottom:18px
+}
+.lesson{
+background:white;border-radius:25px;padding:25px;
+box-shadow:0 8px 25px #5d3ba015;margin-bottom:18px
+}
+.sentence{
+font-size:25px;font-weight:750;text-align:center;padding:25px 5px
+}
+.arabic{text-align:center;color:#888;margin-bottom:20px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.primary{
+background:#7047d9;color:white;padding:12px 18px;border-radius:14px;font-weight:700
+}
+.secondary{
+background:#f0eaff;color:#7047d9;padding:12px 18px;border-radius:14px;font-weight:700
+}
+textarea,input{
+width:100%;border:2px solid #eee7fa;border-radius:15px;
+padding:14px;font-size:16px;outline:none;margin:10px 0
+}
+textarea:focus,input:focus{border-color:#9a78e9}
+.result{
+margin-top:15px;padding:15px;border-radius:15px;background:#f7f3ff;
+line-height:1.6
+}
+.words{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+.word{
+padding:12px 15px;background:#f4efff;border-radius:14px;
+cursor:pointer;font-weight:700;color:#6541bf
+}
+.skill{margin:15px 0}
+.skill-top{display:flex;justify-content:space-between;font-size:13px;font-weight:700}
+.bar{height:9px;background:#eeeaf5;border-radius:20px;margin-top:7px}
+.bar div{height:100%;background:#8058df;border-radius:20px}
+.nav{
+position:fixed;bottom:15px;left:50%;transform:translateX(-50%);
+background:white;border-radius:22px;padding:10px;
+box-shadow:0 8px 30px #0002;display:flex;gap:5px;z-index:10
+}
+.nav button{
+background:transparent;padding:10px 14px;border-radius:15px;
+font-size:13px;color:#777
+}
+.nav button.active{background:#eee7ff;color:#7047d9;font-weight:800}
+.small{font-size:13px;color:#898295}
+.quiz-option{
+width:100%;padding:14px;margin:7px 0;background:#f7f3ff;
+border-radius:14px;text-align:left;font-weight:600
+}
+.quiz-option:hover{background:#e9dfff}
+@media(max-width:600px){
+.app{padding:14px 14px 100px}
+.hero h1{font-size:27px}
+.stats{gap:5px}.stat{font-size:12px;padding:8px}
+.nav{width:95%;justify-content:space-around}
+.nav button{padding:9px 8px;font-size:11px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+<div class="logo"><span>🌎</span> English Quest</div>
+<div class="stats">
+<div class="stat">🔥 <span id="streak">1</span></div>
+<div class="stat">⭐ <span id="xp">0</span> XP</div>
+</div>
+</header>
+
+<section id="home" class="active">
+
+<div class="hero">
+<h1>Ready for your quest? 🚀</h1>
+<p>Learn English. Think English. Speak English.</p>
+<div class="progress"><div id="mainProgress"></div></div>
+<p style="margin-top:10px;font-size:13px">Level <b id="level">1</b> · Survive English</p>
+</div>
+
+<div class="grid">
+
+<div class="card" onclick="openSection('speak')">
+<div class="icon">🗣️</div><h3>Speak Lab</h3>
+<p>Practice speaking and compare your speech with the target sentence.</p>
+<span class="xp">+20 XP</span>
+</div>
+
+<div class="card" onclick="openSection('think')">
+<div class="icon">🇲🇦➡️🇺🇸</div><h3>Think in English</h3>
+<p>Turn your thoughts into natural English sentences.</p>
+<span class="xp">+20 XP</span>
+</div>
+
+<div class="card" onclick="openSection('listen')">
+<div class="icon">🎧</div><h3>Listening Lab</h3>
+<p>Train your ear from slow speech to fast American English.</p>
+<span class="xp">+20 XP</span>
+</div>
+
+<div class="card" onclick="openSection('reading')">
+<div class="icon">📖</div><h3>Reading</h3>
+<p>Read stories and discover words naturally.</p>
+<span class="xp">+15 XP</span>
+</div>
+
+<div class="card" onclick="openSection('writing')">
+<div class="icon">✍️</div><h3>Writing</h3>
+<p>Write, check your mistakes and try again.</p>
+<span class="xp">+20 XP</span>
+</div>
+
+<div class="card" onclick="openSection('builder')">
+<div class="icon">🧩</div><h3>Sentence Builder</h3>
+<p>Build simple sentences and gradually make them richer.</p>
+<span class="xp">+15 XP</span>
+</div>
+
+<div class="card" onclick="openSection('vocabulary')">
+<div class="icon">🌈</div><h3>Vocabulary Worlds</h3>
+<p>Explore useful vocabulary through themed worlds.</p>
+<span class="xp">+10 XP</span>
+</div>
+
+<div class="card" onclick="openSection('grammar')">
+<div class="icon">🔗</div><h3>Grammar</h3>
+<p>Discover grammar through real examples instead of memorizing rules.</p>
+<span class="xp">+15 XP</span>
+</div>
+
+<div class="card" onclick="openSection('stories')">
+<div class="icon">🎬</div><h3>Conversation Stories</h3>
+<p>Enter real-life conversations and choose what you would say.</p>
+<span class="xp">+25 XP</span>
+</div>
+
+</div>
+
+<div class="lesson" style="margin-top:18px">
+<h3>📊 Your Progress</h3>
+
+<div class="skill"><div class="skill-top"><span>🗣 Speaking</span><span>72%</span></div><div class="bar"><div style="width:72%"></div></div></div>
+<div class="skill"><div class="skill-top"><span>🎧 Listening</span><span>61%</span></div><div class="bar"><div style="width:61%"></div></div></div>
+<div class="skill"><div class="skill-top"><span>📖 Reading</span><span>84%</span></div><div class="bar"><div style="width:84%"></div></div></div>
+<div class="skill"><div class="skill-top"><span>✍️ Writing</span><span>53%</span></div><div class="bar"><div style="width:53%"></div></div></div>
+<div class="skill"><div class="skill-top"><span>🧠 Vocabulary</span><span>70%</span></div><div class="bar"><div style="width:70%"></div></div></div>
+<div class="skill"><div class="skill-top"><span>⚡ Grammar</span><span>64%</span></div><div class="bar"><div style="width:64%"></div></div></div>
+</div>
+
+</section>
+
+<section id="speak">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>🗣️ Speak Lab</h2>
+<p class="small">Listen → speak → compare → repeat.</p>
+<div class="sentence" id="speakSentence">I want to learn English.</div>
+<div class="arabic">أريد أن أتعلم الإنجليزية.</div>
+<div class="actions">
+<button class="primary" onclick="speak('I want to learn English.')">🔊 Listen</button>
+<button class="primary" onclick="startSpeaking()">🎙️ Speak</button>
+<button class="secondary" onclick="newSpeakSentence()">↻ New sentence</button>
+</div>
+<div id="speakResult"></div>
+</div>
+</section>
+
+<section id="think">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>🇲🇦➡️🇺🇸 Think in English</h2>
+<p style="margin:12px 0">أنا أريد أن أذهب إلى الجامعة غداً.</p>
+<textarea id="thinkInput" placeholder="Write your English sentence..."></textarea>
+<button class="primary" onclick="checkThink()">Check my answer</button>
+<div id="thinkResult"></div>
+</div>
+</section>
+
+<section id="listen">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>🎧 Listening Lab</h2>
+<p class="small">Choose your speed.</p>
+<div class="actions" style="margin:20px 0">
+<button class="secondary" onclick="listenSpeed(.65)">🐢 Slow</button>
+<button class="primary" onclick="listenSpeed(1)">🙂 Normal</button>
+<button class="secondary" onclick="listenSpeed(1.35)">⚡ Fast</button>
+</div>
+<button class="primary" onclick="listenQuiz()">Start Listening Challenge</button>
+<div id="listenResult"></div>
+</div>
+</section>
+
+<section id="reading">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>📖 Reading</h2>
+<h3 style="margin:20px 0 10px">A New Day</h3>
+<p style="line-height:1.8">
+Every morning, Maya opens her window and looks at the city.
+She drinks coffee, checks her plans, and gets ready for university.
+She wants to improve her English because she dreams of traveling around the world.
+</p>
+<div class="words">
+<div class="word" onclick="wordInfo('dream')">dream</div>
+<div class="word" onclick="wordInfo('improve')">improve</div>
+<div class="word" onclick="wordInfo('travel')">travel</div>
+</div>
+<div id="wordResult"></div>
+</div>
+</section>
+
+<section id="writing">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>✍️ Writing</h2>
+<p>Write 3–5 sentences about your day.</p>
+<textarea id="writingInput" rows="7" placeholder="Today I..."></textarea>
+<button class="primary" onclick="checkWriting()">Check writing</button>
+<div id="writingResult"></div>
+</div>
+</section>
+
+<section id="builder">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>🧩 Sentence Builder</h2>
+<p>Build the sentence in the correct order.</p>
+<div class="words" id="builderWords"></div>
+<div id="builderResult"></div>
+</div>
+</section>
+
+<section id="vocabulary">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>🌈 Vocabulary Worlds</h2>
+<div class="grid" id="vocabGrid"></div>
+</div>
+</section>
+
+<section id="grammar">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>🔗 Grammar through examples</h2>
+<p style="margin:15px 0">Look at the examples:</p>
+<div class="result">
+<b>I work every day.</b><br>
+<b>She works every day.</b><br><br>
+We add <b>-s</b> when the subject is <b>he / she / it</b> in the present simple.
+</div>
+<button class="primary" onclick="grammarQuiz()">Practice</button>
+<div id="grammarResult"></div>
+</div>
+</section>
+
+<section id="stories">
+<button class="back" onclick="openSection('home')">← Home</button>
+<div class="lesson">
+<h2>🎬 Conversation Story</h2>
+<div class="result">
+👨 <b>Alex:</b> Hey! What are you doing this weekend?
+</div>
+<p style="margin:18px 0;font-weight:700">What would you say?</p>
+<button class="quiz-option" onclick="storyAnswer(1)">I'm going to visit my friend.</button>
+<button class="quiz-option" onclick="storyAnswer(2)">Yesterday I was tired.</button>
+<button class="quiz-option" onclick="storyAnswer(3)">I don't know English.</button>
+<div id="storyResult"></div>
+</div>
+</section>
+
+</div>
+
+<div class="nav">
+<button onclick="openSection('home')" class="active">🏠 Home</button>
+<button onclick="openSection('speak')">🗣️ Speak</button>
+<button onclick="openSection('listen')">🎧 Listen</button>
+<button onclick="openSection('vocabulary')">🌈 Words</button>
+</div>
+
+<script>
+let xp=Number(localStorage.getItem("eq_xp")||0);
+let streak=Number(localStorage.getItem("eq_streak")||1);
+
+const sentences=[
+["I want to learn English.","أريد أن أتعلم الإنجليزية."],
+["I am going to university tomorrow.","سأذهب إلى الجامعة غداً."],
+["I love traveling around the world.","أحب السفر حول العالم."],
+["I need to practice every day.","أحتاج إلى التدريب كل يوم."],
+["I feel happy when I learn something new.","أشعر بالسعادة عندما أتعلم شيئاً جديداً."]
+];
+
+function updateStats(){
+document.getElementById("xp").textContent=xp;
+document.getElementById("streak").textContent=streak;
+document.getElementById("level").textContent=Math.floor(xp/100)+1;
+document.getElementById("mainProgress").style.width=(xp%100)+"%";
+localStorage.setItem("eq_xp",xp);
+}
+function addXP(n){
+xp+=n;updateStats();
+}
+function openSection(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+window.scrollTo(0,0);
+}
+function speak(text,rate=1){
+if(!("speechSynthesis" in window)){
+alert("Your browser does not support speech synthesis.");
+return;
+}
+speechSynthesis.cancel();
+let u=new SpeechSynthesisUtterance(text);
+u.lang="en-US";u.rate=rate;u.pitch=1;
+speechSynthesis.speak(u);
+}
+function startSpeaking(){
+if(!("webkitSpeechRecognition" in window)&&!("SpeechRecognition" in window)){
+document.getElementById("speakResult").innerHTML=
+'<div class="result">🎙️ Speech recognition is not available in this browser. Try Chrome/Safari with microphone permission.</div>';
+return;
+}
+const R=window.SpeechRecognition||window.webkitSpeechRecognition;
+const r=new R();
+r.lang="en-US";r.interimResults=false;r.maxAlternatives=1;
+document.getElementById("speakResult").innerHTML='<div class="result">🎙️ Listening...</div>';
+r.start();
+r.onresult=e=>{
+let said=e.results[0][0].transcript;
+let target=document.getElementById("speakSentence").textContent;
+let score=compareText(said,target);
+document.getElementById("speakResult").innerHTML=
+`<div class="result">
+🎙️ <b>You said:</b> ${said}<br>
+🎯 <b>Target:</b> ${target}<br><br>
+${score>=85?"🎉 Excellent!":score>=65?"👍 Good! Repeat once more.":"💪 Keep practicing!"}
+<br><small>Text match: ${score}%</small>
+</div>`;
+if(score>=85)addXP(20);
+};
+r.onerror=()=>{
+document.getElementById("speakResult").innerHTML=
+'<div class="result">Could not access the microphone. Check your browser permission.</div>';
+};
+}
+function compareText(a,b){
+a=a.toLowerCase().replace(/[^\w\s]/g,"").split(/\s+/);
+b=b.toLowerCase().replace(/[^\w\s]/g,"").split(/\s+/);
+let same=a.filter(x=>b.includes(x)).length;
+return Math.round((same/b.length)*100);
+}
+function newSpeakSentence(){
+let x=sentences[Math.floor(Math.random()*sentences.length)];
+document.getElementById("speakSentence").textContent=x[0];
+document.querySelector("#speak .arabic").textContent=x[1];
+document.getElementById("speakResult").innerHTML="";
+}
+function checkThink(){
+let v=document.getElementById("thinkInput").value.trim().toLowerCase();
+let correct="i want to go to university tomorrow";
+let score=compareText(v,correct);
+document.getElementById("thinkResult").innerHTML=
+`<div class="result">
+${score>=90?"✅ Perfect!":"📝 You are close."}<br>
+<b>Correct:</b> I want to go to university tomorrow.<br>
+<small>Match: ${score}%</small>
+</div>`;
+if(score>=90)addXP(20);
+}
+function listenSpeed(rate){
+speak("I want to learn English because I want to travel around the world.",rate);
+addXP(5);
+}
+function listenQuiz(){
+document.getElementById("listenResult").innerHTML=`
+<div class="result">
+<button class="primary" onclick="speak('She goes to university every morning.')">🔊 Play</button>
+<p style="margin:15px 0">What does she do every morning?</p>
+<button class="quiz-option" onclick="listenAnswer(false)">She goes shopping.</button>
+<button class="quiz-option" onclick="listenAnswer(true)">She goes to university.</button>
+<button class="quiz-option" onclick="listenAnswer(false)">She travels.</button>
+</div>`;
+}
+function listenAnswer(ok){
+document.getElementById("listenResult").innerHTML=
+`<div class="result">${ok?"🎉 Correct! +20 XP":"❌ Not quite. Listen again and try."}</div>`;
+if(ok)addXP(20);
+}
+function wordInfo(word){
+let data={
+dream:["حلم","I dream of traveling."],
+improve:["يطوّر / يحسّن","I want to improve my English."],
+travel:["يسافر","I love to travel."]
+};
+let x=data[word];
+document.getElementById("wordResult").innerHTML=
+`<div class="result"><b>${word}</b> — ${x[0]}<br>${x[1]}<br><button class="secondary" onclick="speak('${word}')">🔊 Hear</button></div>`;
+addXP(3);
+}
+function checkWriting(){
+let v=document.getElementById("writingInput").value.trim();
+if(v.length<15){
+document.getElementById("writingResult").innerHTML='<div class="result">✍️ Write a little more so we can check it.</div>';
+return;
+}
+let errors=[];
+if(/\bi am go\b/i.test(v))errors.push("Use “I am going” instead of “I am go”.");
+if(/\bhe go\b/i.test(v))errors.push("Use “he goes” in the present simple.");
+document.getElementById("writingResult").innerHTML=
+`<div class="result">✨ Good effort!<br>${errors.length?errors.join("<br>"):"No basic grammar mistakes detected."}</div>`;
+addXP(20);
+}
+let builderTarget=["I","want","to","learn","English"];
+let builderChosen=[];
+function renderBuilder(){
+document.getElementById("builderWords").innerHTML="";
+builderTarget.forEach((w,i)=>{
+let b=document.createElement("button");
+b.className="word";b.textContent=w;
+b.onclick=()=>chooseWord(i,w);
+document.getElementById("builderWords").appendChild(b);
+});
+}
+function chooseWord(i,w){
+if(builderChosen.includes(i))return;
+builderChosen.push(i);
+document.getElementById("builderResult").innerHTML=
+`<div class="result">${builderChosen.map(i=>builderTarget[i]).join(" ")}</div>`;
+if(builderChosen.length===builderTarget.length){
+if(builderChosen.every((x,i)=>x===i)){
+document.getElementById("builderResult").innerHTML=
+'<div class="result">🎉 Perfect sentence! +15 XP</div>';addXP(15);
+}else{
+document.getElementById("builderResult").innerHTML=
+'<div class="result">Almost! Try again.</div>';builderChosen=[];
+}
+}
+}
+renderBuilder();
+
+let vocab={
+"🍎 Fruits":["apple","banana","orange","grape"],
+"🎨 Colors":["purple","blue","green","yellow"],
+"👗 Clothes":["dress","shirt","shoes","jacket"],
+"👁️ Body":["eye","hand","head","heart"],
+"🏠 Home":["room","door","window","kitchen"],
+"🎓 University":["class","student","teacher","exam"],
+"✈️ Travel":["airport","ticket","hotel","passport"],
+"🍔 Food":["bread","rice","chicken","vegetables"],
+"❤️ Feelings":["happy","sad","excited","calm"],
+"🌦️ Weather":["sunny","rainy","cloudy","windy"]
+};
+Object.entries(vocab).forEach(([title,words])=>{
+let d=document.createElement("div");d.className="card";
+d.innerHTML=`<div class="icon">${title.split(" ")[0]}</div><h3>${title.substring(2)}</h3>
+<p>${words.join(" · ")}</p><span class="xp">Explore →</span>`;
+d.onclick=()=>speak(words.join(", "));
+document.getElementById("vocabGrid").appendChild(d);
+});
+function grammarQuiz(){
+document.getElementById("grammarResult").innerHTML=`
+<div class="result">
+<p>She ___ English every day.</p>
+<button class="quiz-option" onclick="grammarAnswer(false)">study</button>
+<button class="quiz-option" onclick="grammarAnswer(true)">studies</button>
+</div>`;
+}
+function grammarAnswer(ok){
+document.getElementById("grammarResult").innerHTML=
+`<div class="result">${ok?"✅ Correct! +15 XP":"❌ Try again."}</div>`;
+if(ok)addXP(15);
+}
+function storyAnswer(n){
+document.getElementById("storyResult").innerHTML=
+n===1?'<div class="result">💜 Great! That is a natural answer. +25 XP</div>':
+'<div class="result">Try an answer that matches the question about this weekend.</div>';
+if(n===1)addXP(25);
+}
+updateStats();
+</script>
+</body>
+</html>
