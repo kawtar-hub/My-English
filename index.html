@@ -1,0 +1,5150 @@
+<dlink rel="icon" type="image/jpeg" href="IMG_0453.jpeg">
+<link rel="apple-touch-icon" href="IMG_0453.jpeg">
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Quest</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+--navy:#172554;
+--navy2:#1e3a5f;
+--teal:#0f766e;
+--teal-light:#e7f8f5;
+--orange:#f97316;
+--gold:#f59e0b;
+--cream:#fffaf2;
+--bg:#f4f7f8;
+--text:#1f2937;
+--muted:#718096;
+--line:#e5e7eb;
+--success:#15803d;
+--success-bg:#ecfdf3;
+--error:#be123c;
+--error-bg:#fff1f2;
+}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:linear-gradient(135deg,#f7faf9,#eef5f4,#fffaf2);
+color:var(--text);
+min-height:100vh;
+padding-bottom:90px
+}
+
+button{
+font:inherit;
+border:0;
+cursor:pointer
+}
+
+.app{
+max-width:1100px;
+margin:auto;
+padding:20px
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 4px 25px
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+color:var(--navy)
+}
+
+.logo span{font-size:29px}
+
+.stats{
+display:flex;
+gap:10px
+}
+
+.stat{
+background:white;
+padding:9px 13px;
+border-radius:15px;
+box-shadow:0 5px 18px #17255416;
+font-weight:700;
+font-size:14px
+}
+
+.hero{
+background:linear-gradient(135deg,var(--navy),var(--teal));
+color:white;
+border-radius:28px;
+padding:30px;
+box-shadow:0 15px 35px #17255430;
+margin-bottom:25px
+}
+
+.hero h1{
+font-size:32px;
+margin-bottom:8px
+}
+
+.hero p{
+opacity:.9;
+margin-bottom:20px
+}
+
+.progress{
+height:10px;
+background:#ffffff3b;
+border-radius:20px;
+overflow:hidden
+}
+
+.progress div{
+height:100%;
+background:var(--gold);
+border-radius:20px;
+width:0%;
+transition:.4s
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:15px
+}
+
+.card{
+background:#fff;
+border-radius:23px;
+padding:22px;
+box-shadow:0 8px 25px #17255412;
+transition:.2s;
+border:1px solid #edf0f1
+}
+
+.card:hover{
+transform:translateY(-3px);
+box-shadow:0 12px 30px #17255420
+}
+
+.icon{
+font-size:35px;
+margin-bottom:12px
+}
+
+.card h3{margin-bottom:7px}
+
+.card p{
+font-size:14px;
+color:var(--muted);
+line-height:1.5
+}
+
+.xp{
+display:inline-block;
+margin-top:15px;
+background:#fff4df;
+color:#b45309;
+padding:7px 10px;
+border-radius:12px;
+font-size:12px;
+font-weight:800
+}
+
+section{display:none}
+
+section.active{display:block}
+
+.back{
+background:white;
+color:var(--navy);
+padding:10px 15px;
+border-radius:13px;
+font-weight:700;
+margin-bottom:18px;
+box-shadow:0 3px 12px #17255410
+}
+
+.lesson{
+background:white;
+border-radius:25px;
+padding:25px;
+box-shadow:0 8px 25px #17255412;
+margin-bottom:18px
+}
+
+.sentence{
+font-size:25px;
+font-weight:750;
+text-align:center;
+padding:25px 5px;
+line-height:1.5
+}
+
+.arabic{
+text-align:center;
+color:#888;
+margin-bottom:20px;
+font-size:16px
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center
+}
+
+.primary{
+background:var(--teal);
+color:white;
+padding:12px 18px;
+border-radius:14px;
+font-weight:700
+}
+
+.primary:hover{
+background:#0b625c
+}
+
+.secondary{
+background:var(--teal-light);
+color:var(--teal);
+padding:12px 18px;
+border-radius:14px;
+font-weight:700
+}
+
+.danger{
+background:#ffe8ed;
+color:#c0395b;
+padding:12px 18px;
+border-radius:14px;
+font-weight:700
+}
+
+textarea,input{
+width:100%;
+border:2px solid var(--line);
+border-radius:15px;
+padding:14px;
+font-size:16px;
+outline:none;
+margin:10px 0
+}
+
+textarea:focus,input:focus{
+border-color:var(--teal)
+}
+
+.result{
+margin-top:15px;
+padding:15px;
+border-radius:15px;
+background:#f7fafb;
+line-height:1.7
+}
+
+.success{
+background:var(--success-bg);
+color:#166534
+}
+
+.error{
+background:var(--error-bg);
+color:var(--error)
+}
+
+.words{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px
+}
+
+.word{
+padding:12px 15px;
+background:#edf8f6;
+border-radius:14px;
+cursor:pointer;
+font-weight:700;
+color:var(--teal)
+}
+
+.skill{margin:15px 0}
+
+.skill-top{
+display:flex;
+justify-content:space-between;
+font-size:13px;
+font-weight:700
+}
+
+.bar{
+height:9px;
+background:#e8edef;
+border-radius:20px;
+margin-top:7px;
+overflow:hidden
+}
+
+.bar div{
+height:100%;
+background:linear-gradient(90deg,var(--teal),var(--orange));
+border-radius:20px;
+transition:.5s
+}
+
+.nav{
+position:fixed;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+border-radius:22px;
+padding:10px;
+box-shadow:0 8px 30px #17255425;
+display:flex;
+gap:5px;
+z-index:10
+}
+
+.nav button{
+background:transparent;
+padding:10px 14px;
+border-radius:15px;
+font-size:13px;
+color:#777
+}
+
+.nav button.active{
+background:#e7f8f5;
+color:var(--teal);
+font-weight:800
+}
+
+.small{
+font-size:13px;
+color:#898295
+}
+
+.counter{
+display:inline-block;
+background:#fff4df;
+color:#b45309;
+padding:7px 12px;
+border-radius:12px;
+font-weight:800;
+margin:12px 0
+}
+
+.quiz-option{
+width:100%;
+padding:14px;
+margin:7px 0;
+background:#f7fafb;
+border:1px solid #e8edef;
+border-radius:14px;
+text-align:left;
+font-weight:600;
+transition:.2s
+}
+
+.quiz-option:hover{
+background:#e7f8f5;
+transform:translateX(3px)
+}
+
+.quiz-option.correct{
+background:#dff8e9;
+color:#17683e
+}
+
+.quiz-option.wrong{
+background:#ffe1e8;
+color:#a32d4b
+}
+
+/* VOCAB */
+
+.vocab-category-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:14px;
+margin-top:20px
+}
+
+.vocab-category{
+background:linear-gradient(145deg,#ffffff,#f2f8f7);
+border:1px solid #e3ecea;
+border-radius:22px;
+padding:22px 14px;
+text-align:center;
+cursor:pointer;
+transition:.2s
+}
+
+.vocab-category:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px #0f766e1c
+}
+
+.vocab-category-icon{
+font-size:42px;
+margin-bottom:10px
+}
+
+.vocab-category-title{
+font-weight:800;
+color:var(--navy)
+}
+
+.vocab-category-count{
+font-size:12px;
+color:#888;
+margin-top:5px
+}
+
+.vocab-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+gap:12px;
+margin-top:20px
+}
+
+.vocab-item{
+background:#fafcfc;
+border:1px solid #e4eceb;
+border-radius:20px;
+padding:12px;
+text-align:center
+}
+
+.vocab-picture{
+height:90px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:52px;
+background:#edf8f6;
+border-radius:16px;
+margin-bottom:9px
+}
+
+.vocab-word{
+font-weight:800;
+font-size:16px;
+margin-bottom:3px
+}
+
+.vocab-ar{
+font-size:12px;
+color:#888;
+margin-bottom:9px
+}
+
+.mic{
+width:38px;
+height:38px;
+border-radius:50%;
+background:var(--teal);
+color:white;
+font-size:17px;
+display:inline-flex;
+align-items:center;
+justify-content:center
+}
+
+.category-title{
+margin-top:10px;
+font-size:24px;
+color:var(--navy)
+}
+
+.search{margin:15px 0}
+
+.hidden{display:none!important}
+
+/* =========================
+   GRAMMAR - NEW CLEAN DESIGN
+========================= */
+
+.grammar-card{
+background:#fff;
+border-radius:22px;
+padding:24px;
+margin:18px 0;
+border:1px solid #e5eaec;
+box-shadow:0 5px 18px #1725540b
+}
+
+.grammar-card h3{
+color:var(--navy);
+margin-bottom:12px;
+font-size:22px
+}
+
+.grammar-card h4{
+color:var(--teal);
+margin-bottom:7px
+}
+
+.grammar-intro{
+background:linear-gradient(135deg,#eef8f6,#fff7eb);
+border-radius:20px;
+padding:22px;
+margin:18px 0;
+line-height:1.8
+}
+
+.grammar-rule{
+background:#f2f7f8;
+border-radius:16px;
+padding:16px;
+margin-top:14px;
+line-height:1.9;
+border-left:4px solid var(--teal)
+}
+
+.example{
+background:#fffaf2;
+border:1px solid #f5ead7;
+border-radius:14px;
+padding:14px;
+margin:10px 0;
+line-height:1.9
+}
+
+.example b{
+color:var(--navy)
+}
+
+.verb-change-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:14px;
+margin-top:15px
+}
+
+.verb-change{
+background:#f8fafb;
+border:1px solid #e6ecee;
+border-radius:17px;
+padding:17px;
+line-height:1.8
+}
+
+.verb-change strong{
+color:var(--teal)
+}
+
+.pronoun-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+gap:10px;
+margin-top:15px
+}
+
+.pronoun-box{
+background:#f8fafb;
+border-radius:15px;
+padding:14px;
+text-align:center;
+border:1px solid #e7ecee
+}
+
+.pronoun-box strong{
+display:block;
+font-size:19px;
+color:var(--navy);
+margin-bottom:4px
+}
+
+.table-wrap{
+width:100%;
+overflow-x:auto;
+margin-top:18px;
+border:1px solid #e4eaec;
+border-radius:16px
+}
+
+.tense-table{
+width:100%;
+min-width:780px;
+border-collapse:collapse;
+background:white
+}
+
+.tense-table td,
+.tense-table th{
+padding:13px 12px;
+border-bottom:1px solid #edf0f1;
+text-align:left;
+vertical-align:top
+}
+
+.tense-table th{
+background:#f1f7f6;
+color:var(--navy);
+font-size:13px
+}
+
+.tense-table tr:last-child td{
+border-bottom:0
+}
+
+.tense-table td:first-child{
+font-weight:800;
+color:var(--teal)
+}
+
+.tense-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+margin-top:24px
+}
+
+.tense-title span{
+font-size:12px;
+background:#fff4df;
+color:#a16207;
+padding:6px 9px;
+border-radius:9px
+}
+
+.grammar-section-label{
+display:inline-block;
+font-size:12px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.5px;
+color:var(--orange);
+margin-bottom:7px
+}
+
+/* CONNECTORS */
+
+.connector{
+background:#f8fafb;
+padding:17px;
+border-radius:18px;
+margin:10px 0;
+border:1px solid #e6ecee
+}
+
+.connector-word{
+font-size:21px;
+font-weight:800;
+color:var(--navy)
+}
+
+.connector-example{
+font-size:17px;
+margin-top:6px
+}
+
+.connector-ar{
+color:#888;
+font-size:13px;
+margin-top:4px
+}
+
+/* READING */
+
+.reading-text{
+font-size:18px;
+line-height:2;
+margin:20px 0
+}
+
+.reading-level{
+display:inline-block;
+background:#e7f8f5;
+color:var(--teal);
+padding:6px 10px;
+border-radius:10px;
+font-weight:700;
+font-size:12px
+}
+
+.reading-meta{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:10px
+}
+
+.reading-tag{
+display:inline-block;
+background:#fff4df;
+color:#a16207;
+padding:6px 10px;
+border-radius:10px;
+font-size:12px;
+font-weight:700
+}
+
+.reading-question-title{
+font-size:18px;
+font-weight:800;
+margin:20px 0 10px
+}
+
+/* WRITING */
+
+.prompt{
+background:#f7fafb;
+padding:18px;
+border-radius:18px;
+font-size:18px;
+line-height:1.7;
+margin:15px 0
+}
+
+/* PROGRESS */
+
+.progress-summary{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-top:18px
+}
+
+.progress-box{
+background:#f8fafb;
+border-radius:18px;
+padding:16px;
+border:1px solid #e6ecee
+}
+
+.progress-box strong{
+font-size:23px;
+color:var(--navy)
+}
+
+.history-empty{
+padding:15px;
+background:#f8fafb;
+border-radius:15px;
+color:#8a9499;
+font-size:14px
+}
+
+.complete-box{
+text-align:center;
+padding:25px
+}
+
+.complete-box h3{
+color:var(--teal);
+margin-bottom:8px
+}
+
+@media(max-width:600px){
+
+.app{
+padding:14px 14px 100px
+}
+
+.hero h1{font-size:27px}
+
+.stats{gap:5px}
+
+.stat{
+font-size:12px;
+padding:8px
+}
+
+.nav{
+width:95%;
+justify-content:space-around
+}
+
+.nav button{
+padding:9px 8px;
+font-size:11px
+}
+
+.vocab-grid{
+grid-template-columns:repeat(2,1fr)
+}
+
+.sentence{font-size:21px}
+
+.tense-table{
+font-size:12px
+}
+
+.grammar-card{
+padding:18px
+}
+
+.reading-text{
+font-size:17px
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+<div class="logo">
+<span>🌎</span> English Quest
+</div>
+
+<div class="stats">
+<div class="stat">🔥 <span id="streak">0</span></div>
+<div class="stat">⭐ <span id="xp">0</span> XP</div>
+</div>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="active">
+
+<div class="hero">
+
+<h1>Ready for your quest? 🚀</h1>
+
+<p>
+Learn English. Think English. Speak English.
+</p>
+
+<div class="progress">
+<div id="mainProgress"></div>
+</div>
+
+<p style="margin-top:10px;font-size:13px">
+Overall progress:
+<b id="overallPercent">0%</b>
+· Level <b id="level">1</b>
+</p>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card" onclick="openSection('speak')">
+<div class="icon">🗣️</div>
+<h3>Speak Lab</h3>
+<p>1000 progressive sentences. Listen, speak, compare and move forward.</p>
+<span class="xp">1000 lessons</span>
+</div>
+
+<div class="card" onclick="openSection('think')">
+<div class="icon">🇲🇦➡️🇺🇸</div>
+<h3>Think in English</h3>
+<p>1000 Arabic-to-English sentences. Correct answers stay below as your history.</p>
+<span class="xp">1000 lessons</span>
+</div>
+
+<div class="card" onclick="openSection('listen')">
+<div class="icon">🎧</div>
+<h3>Listening Lab</h3>
+<p>1000 listening questions with three choices. Wrong answers repeat.</p>
+<span class="xp">1000 questions</span>
+</div>
+
+<div class="card" onclick="openSection('reading')">
+<div class="icon">📖</div>
+<h3>Reading</h3>
+<p>400 passages from beginner level to advanced reading.</p>
+<span class="xp">400 passages</span>
+</div>
+
+<div class="card" onclick="openSection('writing')">
+<div class="icon">✍️</div>
+<h3>Writing</h3>
+<p>500 progressive writing tasks. Correct your mistakes and rewrite.</p>
+<span class="xp">500 tasks</span>
+</div>
+
+<div class="card" onclick="openSection('builder')">
+<div class="icon">🧩</div>
+<h3>Sentence Builder</h3>
+<p>1000 sentences with Arabic meaning before you build them.</p>
+<span class="xp">1000 sentences</span>
+</div>
+
+<div class="card" onclick="openSection('vocabulary')">
+<div class="icon">🌈</div>
+<h3>Vocabulary Worlds</h3>
+<p>Enter organized worlds instead of scrolling through one giant list.</p>
+<span class="xp">Explore</span>
+</div>
+
+<div class="card" onclick="openSection('connectors')">
+<div class="icon">🔗</div>
+<h3>Connectors</h3>
+<p>Useful linking words explained through practical examples.</p>
+<span class="xp">Learn</span>
+</div>
+
+<div class="card" onclick="openSection('grammar')">
+<div class="icon">📚</div>
+<h3>Easy Grammar</h3>
+<p>Learn the rules, verb families and complete tense tables.</p>
+<span class="xp">Learn</span>
+</div>
+
+<div class="card" onclick="openSection('grammarPractice')">
+<div class="icon">✏️</div>
+<h3>Grammar Practice</h3>
+<p>1000 questions with three choices. Mistakes repeat until correct.</p>
+<span class="xp">1000 questions</span>
+</div>
+
+<div class="card" onclick="openSection('stories')">
+<div class="icon">🎬</div>
+<h3>Conversation Stories</h3>
+<p>1000 conversation turns. Choose your reply and continue the story.</p>
+<span class="xp">1000 turns</span>
+</div>
+
+</div>
+
+
+<div class="lesson" style="margin-top:18px">
+
+<h3>📊 Your Progress</h3>
+
+<div class="skill">
+<div class="skill-top">
+<span>🗣 Speaking</span>
+<span id="pSpeaking">0%</span>
+</div>
+<div class="bar"><div id="bSpeaking"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-top">
+<span>🎧 Listening</span>
+<span id="pListening">0%</span>
+</div>
+<div class="bar"><div id="bListening"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-top">
+<span>📖 Reading</span>
+<span id="pReading">0%</span>
+</div>
+<div class="bar"><div id="bReading"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-top">
+<span>✍️ Writing</span>
+<span id="pWriting">0%</span>
+</div>
+<div class="bar"><div id="bWriting"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-top">
+<span>🧠 Vocabulary</span>
+<span id="pVocabulary">0%</span>
+</div>
+<div class="bar"><div id="bVocabulary"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-top">
+<span>⚡ Grammar</span>
+<span id="pGrammar">0%</span>
+</div>
+<div class="bar"><div id="bGrammar"></div></div>
+</div>
+
+<div class="progress-summary">
+
+<div class="progress-box">
+<div>Completed lessons</div>
+<strong id="completedTotal">0</strong>
+</div>
+
+<div class="progress-box">
+<div>Total learning units</div>
+<strong id="totalUnits">0</strong>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SPEAK -->
+
+<section id="speak">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>🗣️ Speak Lab</h2>
+
+<p class="small">
+Listen → speak → compare → repeat → next.
+</p>
+
+<div class="counter">
+Sentence <span id="speakNumber">1</span> / 1000
+</div>
+
+<div class="sentence" id="speakSentence"></div>
+
+<div class="arabic" id="speakArabic"></div>
+
+<div class="actions">
+
+<button class="primary" onclick="speakCurrent()">
+🔊 Listen
+</button>
+
+<button class="primary" onclick="startSpeaking()">
+🎙️ Speak
+</button>
+
+</div>
+
+<div id="speakResult"></div>
+
+</div>
+
+<div class="lesson" id="speakHistory"></div>
+
+</section>
+
+
+<!-- THINK -->
+
+<section id="think">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>🇲🇦➡️🇺🇸 Think in English</h2>
+
+<p class="small">
+Translate the idea naturally into English. There are 1000 sentences.
+</p>
+
+<div class="counter">
+Sentence <span id="thinkNumber">1</span> / 1000
+</div>
+
+<div class="prompt" id="thinkPrompt"></div>
+
+<textarea
+id="thinkInput"
+placeholder="Write your English sentence..."
+></textarea>
+
+<button class="primary" onclick="checkThink()">
+Check my answer
+</button>
+
+<div id="thinkResult"></div>
+
+</div>
+
+<div class="lesson">
+<h3>✅ Completed sentences</h3>
+<div id="thinkHistory"></div>
+</div>
+
+</section>
+
+
+<!-- LISTEN -->
+
+<section id="listen">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>🎧 Listening Lab</h2>
+
+<p class="small">
+Choose your speed, listen carefully, then answer.
+</p>
+
+<div class="actions" style="margin:20px 0">
+
+<button class="secondary" onclick="listenSpeed(.65)">
+🐢 Slow
+</button>
+
+<button class="primary" onclick="listenSpeed(1)">
+🙂 Normal
+</button>
+
+<button class="secondary" onclick="listenSpeed(1.35)">
+⚡ Fast
+</button>
+
+</div>
+
+<div class="counter">
+Question <span id="listenNumber">1</span> / 1000
+</div>
+
+<div id="listenQuestion"></div>
+
+</div>
+
+<div class="lesson">
+<h3>✅ Completed questions</h3>
+<div id="listenHistory"></div>
+</div>
+
+</section>
+
+
+<!-- READING -->
+
+<section id="reading">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>📖 Reading</h2>
+
+<p class="small">
+Read carefully. The texts become longer and more difficult step by step.
+</p>
+
+<div class="counter">
+Passage <span id="readingNumber">1</span> / 400
+</div>
+
+<div id="readingLevel"></div>
+
+<div class="reading-meta">
+<span class="reading-tag" id="readingDifficulty"></span>
+<span class="reading-tag" id="readingWordsCount"></span>
+</div>
+
+<h3 id="readingTitle" style="margin:18px 0 10px"></h3>
+
+<div class="reading-text" id="readingText"></div>
+
+<div class="words" id="readingWords"></div>
+
+<div id="readingQuestion"></div>
+
+</div>
+
+<div class="lesson">
+<h3>📚 Completed readings</h3>
+<div id="readingHistory"></div>
+</div>
+
+</section>
+
+
+<!-- WRITING -->
+
+<section id="writing">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>✍️ Writing</h2>
+
+<p class="small">
+Write, check, correct, rewrite. You move forward only when the text is ready.
+</p>
+
+<div class="counter">
+Writing task <span id="writingNumber">1</span> / 500
+</div>
+
+<div class="prompt" id="writingPrompt"></div>
+
+<textarea
+id="writingInput"
+rows="9"
+placeholder="Write your answer here..."
+></textarea>
+
+<button class="primary" onclick="checkWriting()">
+Check writing
+</button>
+
+<div id="writingResult"></div>
+
+</div>
+
+<div class="lesson">
+<h3>📝 Completed writing</h3>
+<div id="writingHistory"></div>
+</div>
+
+</section>
+
+
+<!-- BUILDER -->
+
+<section id="builder">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>🧩 Sentence Builder</h2>
+
+<p class="small">
+Understand the Arabic meaning first, then build the English sentence.
+</p>
+
+<div class="counter">
+Sentence <span id="builderNumber">1</span> / 1000
+</div>
+
+<div class="prompt" id="builderArabic"></div>
+
+<div id="builderWords" class="words"></div>
+
+<div id="builderResult"></div>
+
+<button class="secondary" onclick="resetBuilder()">
+↻ Reset
+</button>
+
+</div>
+
+<div class="lesson">
+<h3>✅ Completed sentences</h3>
+<div id="builderHistory"></div>
+</div>
+
+</section>
+
+
+<!-- VOCABULARY -->
+
+<section id="vocabulary">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>🌈 Vocabulary Worlds</h2>
+
+<p class="small">
+Choose a world. Then explore its words.
+</p>
+
+<input
+id="vocabSearch"
+class="search"
+placeholder="🔎 Search vocabulary..."
+oninput="searchVocabulary()"
+>
+
+<div id="vocabCategories"></div>
+
+<div id="vocabWords" class="hidden"></div>
+
+</div>
+
+</section>
+
+
+<!-- CONNECTORS -->
+
+<section id="connectors">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>🔗 English Connectors & Useful Words</h2>
+
+<p class="small">
+Learn the word → understand it → see it in a sentence → hear it.
+</p>
+
+<div id="connectorContent"></div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     EASY GRAMMAR - REDESIGNED
+========================= -->
+
+<section id="grammar">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>📚 Easy Grammar</h2>
+
+<p class="small">
+No pressure. Understand the idea first, then look at the pattern, then practice it.
+</p>
+
+
+<div class="grammar-intro">
+
+<strong style="font-size:20px;color:var(--navy)">
+🌱 Grammar Roadmap
+</strong>
+
+<p style="margin-top:10px">
+We will learn English grammar in this order:
+</p>
+
+<div class="pronoun-grid">
+
+<div class="pronoun-box">
+<strong>1</strong>
+Present Simple
+</div>
+
+<div class="pronoun-box">
+<strong>2</strong>
+Past Simple
+</div>
+
+<div class="pronoun-box">
+<strong>3</strong>
+Future with WILL
+</div>
+
+<div class="pronoun-box">
+<strong>4</strong>
+Verb changes
+</div>
+
+<div class="pronoun-box">
+<strong>5</strong>
+Negative
+</div>
+
+<div class="pronoun-box">
+<strong>6</strong>
+Questions
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRESENT -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Lesson 1</span>
+
+<h3>🌱 Present Simple</h3>
+
+<p style="line-height:1.8">
+نستخدم <b>Present Simple</b> عندما نتحدث عن العادات، الحقائق،
+والأشياء التي تحدث بشكل متكرر.
+</p>
+
+<div class="grammar-rule">
+
+<b>الفكرة الأساسية:</b><br><br>
+
+مع:
+<b>I / You / We / They</b><br>
+نستعمل الفعل الأساسي.
+
+<br><br>
+
+مع:
+<b>He / She / It</b><br>
+نغيّر شكل الفعل غالبًا بإضافة
+<b>-s / -es / -ies</b>.
+
+</div>
+
+<div class="example">
+
+<b>Examples</b><br><br>
+
+I work every day.<br>
+You work every day.<br>
+We work every day.<br>
+They work every day.<br><br>
+
+He works every day.<br>
+She works every day.<br>
+It works well.
+
+</div>
+
+</div>
+
+
+<!-- SUBJECTS -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Foundation</span>
+
+<h3>👥 The 7 Subjects</h3>
+
+<p style="line-height:1.8">
+هذه هي الضمائر الأساسية التي يجب أن تعرفيها قبل تصريف الأفعال.
+</p>
+
+<div class="pronoun-grid">
+
+<div class="pronoun-box">
+<strong>I</strong>
+أنا
+</div>
+
+<div class="pronoun-box">
+<strong>You</strong>
+أنت / أنتم
+</div>
+
+<div class="pronoun-box">
+<strong>He</strong>
+هو
+</div>
+
+<div class="pronoun-box">
+<strong>She</strong>
+هي
+</div>
+
+<div class="pronoun-box">
+<strong>It</strong>
+هو/هي لشيء أو حيوان
+</div>
+
+<div class="pronoun-box">
+<strong>We</strong>
+نحن
+</div>
+
+<div class="pronoun-box">
+<strong>They</strong>
+هم / هن
+</div>
+
+</div>
+
+<div class="grammar-rule" style="margin-top:18px">
+
+<b>⭐ أهم قاعدة في Present Simple:</b><br><br>
+
+I / You / We / They → <b>work</b><br>
+He / She / It → <b>works</b>
+
+</div>
+
+</div>
+
+
+<!-- HOW VERBS CHANGE -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Verb Rules</span>
+
+<h3>🔤 How Do Verbs Change?</h3>
+
+<p style="line-height:1.8">
+عندما يكون الفاعل <b>He / She / It</b>، لا نضيف دائمًا حرف
+<b>s</b> بطريقة عشوائية. توجد عدة قواعد.
+</p>
+
+<div class="verb-change-grid">
+
+<div class="verb-change">
+
+<h4>1️⃣ Add -S</h4>
+
+<p>
+معظم الأفعال تأخذ <b>-s</b>.
+</p>
+
+<br>
+
+<strong>work → works</strong><br>
+<strong>read → reads</strong><br>
+<strong>play → plays</strong><br>
+<strong>help → helps</strong><br>
+<strong>open → opens</strong>
+
+</div>
+
+
+<div class="verb-change">
+
+<h4>2️⃣ Add -ES</h4>
+
+<p>
+إذا انتهى الفعل بـ:
+<b>s / sh / ch / x / o</b>
+نضيف <b>-es</b>.
+</p>
+
+<br>
+
+<strong>go → goes</strong><br>
+<strong>watch → watches</strong><br>
+<strong>wash → washes</strong><br>
+<strong>fix → fixes</strong><br>
+<strong>do → does</strong>
+
+</div>
+
+
+<div class="verb-change">
+
+<h4>3️⃣ Change Y → IES</h4>
+
+<p>
+إذا انتهى الفعل بـ consonant + y،
+نحذف <b>y</b> ونضيف <b>ies</b>.
+</p>
+
+<br>
+
+<strong>study → studies</strong><br>
+<strong>try → tries</strong><br>
+<strong>carry → carries</strong><br>
+<strong>study → studies</strong>
+
+</div>
+
+
+<div class="verb-change">
+
+<h4>4️⃣ Vowel + Y</h4>
+
+<p>
+إذا كان قبل <b>y</b> حرف متحرك،
+لا نحذف <b>y</b>.
+نضيف فقط <b>s</b>.
+</p>
+
+<br>
+
+<strong>play → plays</strong><br>
+<strong>enjoy → enjoys</strong><br>
+<strong>stay → stays</strong>
+
+</div>
+
+
+<div class="verb-change">
+
+<h4>5️⃣ Irregular Forms</h4>
+
+<p>
+بعض الأفعال لها شكل خاص ويجب حفظه.
+</p>
+
+<br>
+
+<strong>have → has</strong><br>
+<strong>be → is</strong><br>
+<strong>do → does</strong>
+
+</div>
+
+</div>
+
+<div class="grammar-rule">
+
+⚠️ <b>ملاحظة مهمة:</b><br>
+هذه التغييرات تحدث في Present Simple مع
+<b>He / She / It</b>.
+أما مع I / You / We / They فنستعمل الفعل الأساسي.
+
+</div>
+
+</div>
+
+
+<!-- PAST -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Lesson 2</span>
+
+<h3>⏳ Past Simple</h3>
+
+<p style="line-height:1.8">
+نستخدم <b>Past Simple</b> لشيء حدث وانتهى في الماضي.
+غالبًا نستخدم كلمات مثل:
+<b>yesterday, last week, last year, two days ago</b>.
+</p>
+
+<div class="grammar-rule">
+
+<b>Regular verbs</b><br><br>
+
+work → worked<br>
+play → played<br>
+watch → watched<br>
+clean → cleaned<br>
+study → studied<br>
+try → tried
+
+</div>
+
+<div class="grammar-rule">
+
+<b>Irregular verbs</b><br><br>
+
+go → went<br>
+eat → ate<br>
+see → saw<br>
+drink → drank<br>
+write → wrote<br>
+take → took<br>
+make → made<br>
+speak → spoke
+
+</div>
+
+<div class="example">
+
+I worked yesterday.<br>
+She studied last night.<br>
+They went to university yesterday.<br>
+He ate breakfast this morning.
+
+</div>
+
+</div>
+
+
+<!-- FUTURE -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Lesson 3</span>
+
+<h3>🚀 Future with WILL</h3>
+
+<p style="line-height:1.8">
+نستخدم <b>will + base verb</b> عندما نتحدث عن المستقبل.
+الميزة المهمة هنا: الفعل لا يتغير مع He / She / It.
+</p>
+
+<div class="grammar-rule">
+
+I <b>will work</b>.<br>
+You <b>will work</b>.<br>
+He <b>will work</b>.<br>
+She <b>will work</b>.<br>
+We <b>will work</b>.<br>
+They <b>will work</b>.
+
+</div>
+
+<div class="example">
+
+She will travel tomorrow.<br>
+They will study next week.<br>
+I will read tonight.<br>
+He will write a message.
+
+</div>
+
+</div>
+
+
+<!-- VERB TABLES -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Reference</span>
+
+<h3>📊 Complete Verb Tables</h3>
+
+<p style="line-height:1.8">
+هذه الجداول تجمع لك الشكل الأساسي للفعل في الأزمنة المختلفة،
+والنفي والسؤال.
+</p>
+
+<div id="verbTables"></div>
+
+</div>
+
+
+<!-- NEGATIVE -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Lesson 4</span>
+
+<h3>🚫 Negative Sentences</h3>
+
+<p style="line-height:1.8">
+النفي يختلف حسب الزمن.
+لاحظي أن الفعل يعود إلى <b>base form</b> بعد
+<b>do / does / did</b>.
+</p>
+
+<div class="example">
+
+<b>Present Simple</b><br><br>
+
+I do not work.<br>
+You do not work.<br>
+He does not work.<br>
+She does not work.<br>
+They do not work.
+
+</div>
+
+<div class="grammar-rule">
+
+⭐ لماذا نقول:
+<b>She does not work</b>
+وليس:
+<b>She does not works</b>؟
+
+لأن <b>does</b> حملت علامة الشخص،
+لذلك يعود الفعل إلى شكله الأساسي:
+<b>work</b>.
+
+</div>
+
+<div class="example">
+
+<b>Past Simple</b><br><br>
+
+I did not work.<br>
+She did not work.<br>
+They did not go.<br>
+He did not eat.
+
+</div>
+
+<div class="grammar-rule">
+
+بعد <b>did not</b> نستخدم الفعل الأساسي:
+
+did not <b>go</b> ✅<br>
+did not <b>went</b> ❌
+
+</div>
+
+<div class="example">
+
+<b>Future</b><br><br>
+
+I will not work.<br>
+She will not travel.<br>
+They will not study.<br><br>
+
+Short form:<br>
+I won't work.<br>
+She won't travel.
+
+</div>
+
+</div>
+
+
+<!-- QUESTIONS -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Lesson 5</span>
+
+<h3>❓ Questions</h3>
+
+<p style="line-height:1.8">
+نستخدم كلمات مساعدة مختلفة حسب الزمن.
+</p>
+
+<div class="example">
+
+<b>Present Simple</b><br><br>
+
+Do you work?<br>
+Do they study?<br>
+Does she work?<br>
+Does he study?
+
+</div>
+
+<div class="grammar-rule">
+
+مع <b>Does</b> يعود الفعل إلى شكله الأساسي:
+
+Does she <b>work</b>? ✅<br>
+Does she <b>works</b>? ❌
+
+</div>
+
+<div class="example">
+
+<b>Past Simple</b><br><br>
+
+Did you work yesterday?<br>
+Did she study?<br>
+Did they go home?<br>
+Did he eat breakfast?
+
+</div>
+
+<div class="example">
+
+<b>Future</b><br><br>
+
+Will you work tomorrow?<br>
+Will she travel next week?<br>
+Will they study tonight?
+
+</div>
+
+</div>
+
+
+<!-- QUICK SUMMARY -->
+
+<div class="grammar-card">
+
+<span class="grammar-section-label">Quick Review</span>
+
+<h3>🧠 Remember These 6 Rules</h3>
+
+<div class="grammar-rule">
+
+<b>1.</b> I / You / We / They → base verb<br><br>
+
+<b>2.</b> He / She / It → s / es / ies<br><br>
+
+<b>3.</b> Past regular → usually -ed<br><br>
+
+<b>4.</b> Past irregular → special form<br><br>
+
+<b>5.</b> Future → will + base verb<br><br>
+
+<b>6.</b> After do / does / did / will → base verb
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GRAMMAR PRACTICE -->
+
+<section id="grammarPractice">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>✏️ Grammar Practice</h2>
+
+<p class="small">
+1000 questions. Three choices. Wrong = repeat. Correct = next.
+</p>
+
+<div class="counter">
+Question <span id="grammarNumber">1</span> / 1000
+</div>
+
+<div id="grammarExercise"></div>
+
+</div>
+
+<div class="lesson">
+<h3>✅ Completed grammar questions</h3>
+<div id="grammarHistory"></div>
+</div>
+
+</section>
+
+
+<!-- STORIES -->
+
+<section id="stories">
+
+<button class="back" onclick="openSection('home')">← Home</button>
+
+<div class="lesson">
+
+<h2>🎬 Conversation Story</h2>
+
+<p class="small">
+You are not repeating one conversation forever. The story grows step by step.
+</p>
+
+<div class="counter">
+Conversation <span id="storyNumber">1</span> / 1000
+</div>
+
+<div id="storyDialogue"></div>
+
+</div>
+
+<div class="lesson">
+<h3>💬 Completed conversation</h3>
+<div id="storyHistory"></div>
+</div>
+
+</section>
+
+</div>
+
+
+<!-- NAV -->
+
+<div class="nav">
+
+<button onclick="openSection('home')">🏠 Home</button>
+<button onclick="openSection('speak')">🗣️ Speak</button>
+<button onclick="openSection('listen')">🎧 Listen</button>
+<button onclick="openSection('vocabulary')">🌈 Words</button>
+<button onclick="openSection('grammar')">📚 Grammar</button>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CORE STORAGE
+===================================================== */
+
+const TOTAL={
+speak:1000,
+think:1000,
+listen:1000,
+reading:400,
+writing:500,
+builder:1000,
+grammar:1000,
+stories:1000
+};
+
+const skillTotals={
+Speaking:1000,
+Listening:1000,
+Reading:400,
+Writing:500,
+Vocabulary:100,
+Grammar:1000
+};
+
+let state=JSON.parse(
+localStorage.getItem("englishQuestState")||"null"
+)||{
+xp:0,
+streak:0,
+progress:{
+speak:0,
+think:0,
+listen:0,
+reading:0,
+writing:0,
+builder:0,
+grammar:0,
+stories:0,
+vocabulary:0
+},
+history:{
+speak:[],
+think:[],
+listen:[],
+reading:[],
+writing:[],
+builder:[],
+grammar:[],
+stories:[]
+}
+};
+
+function saveState(){
+localStorage.setItem(
+"englishQuestState",
+JSON.stringify(state)
+);
+}
+
+function addXP(amount){
+state.xp+=amount;
+saveState();
+updateStats();
+}
+
+function updateStats(){
+
+document.getElementById("xp").textContent=state.xp;
+document.getElementById("streak").textContent=state.streak;
+
+document.getElementById("level").textContent=
+Math.floor(state.xp/100)+1;
+
+const totalUnits=
+Object.values(TOTAL).reduce((a,b)=>a+b,0);
+
+const completed=
+state.progress.speak+
+state.progress.think+
+state.progress.listen+
+state.progress.reading+
+state.progress.writing+
+state.progress.builder+
+state.progress.grammar+
+state.progress.stories+
+Math.min(state.progress.vocabulary,100);
+
+const overall=Math.round(
+(completed/(totalUnits+100))*100
+);
+
+document.getElementById("overallPercent").textContent=
+overall+"%";
+
+document.getElementById("mainProgress").style.width=
+overall+"%";
+
+document.getElementById("completedTotal").textContent=
+completed;
+
+document.getElementById("totalUnits").textContent=
+totalUnits+100;
+
+setSkill("Speaking",state.progress.speak,1000);
+setSkill("Listening",state.progress.listen,1000);
+setSkill("Reading",state.progress.reading,400);
+setSkill("Writing",state.progress.writing,500);
+setSkill("Vocabulary",state.progress.vocabulary,100);
+setSkill("Grammar",state.progress.grammar,1000);
+}
+
+function setSkill(name,value,total){
+
+const percent=Math.min(
+100,
+Math.round((value/total)*100)
+);
+
+const text=document.getElementById("p"+name);
+const bar=document.getElementById("b"+name);
+
+if(text)text.textContent=percent+"%";
+if(bar)bar.style.width=percent+"%";
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function openSection(id){
+
+document.querySelectorAll("section")
+.forEach(s=>s.classList.remove("active"));
+
+const target=document.getElementById(id);
+
+if(target)target.classList.add("active");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speak(text,rate=1){
+
+if(!text)return;
+
+if(!("speechSynthesis" in window)){
+alert("Speech synthesis is not available in this browser.");
+return;
+}
+
+window.speechSynthesis.cancel();
+
+const u=new SpeechSynthesisUtterance(text);
+
+u.lang="en-US";
+u.rate=rate;
+u.pitch=1;
+
+window.speechSynthesis.speak(u);
+}
+
+function escapeHTML(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+function normalize(text){
+
+return String(text||"")
+.toLowerCase()
+.replace(/[.,!?;:'"()\-]/g,"")
+.replace(/\s+/g," ")
+.trim();
+}
+
+function similarity(a,b){
+
+const A=normalize(a).split(" ").filter(Boolean);
+const B=normalize(b).split(" ").filter(Boolean);
+
+if(!B.length)return 0;
+
+let same=0;
+
+B.forEach((word,i)=>{
+if(A[i]===word)same++;
+});
+
+return Math.round((same/B.length)*100);
+}
+
+
+/* =====================================================
+   DATA ENGINE
+===================================================== */
+
+const people=[
+["I","أنا"],
+["You","أنت"],
+["We","نحن"],
+["They","هم"],
+["She","هي"],
+["He","هو"],
+["My sister","أختي"],
+["My brother","أخي"],
+["My friend","صديقي"],
+["My mother","أمي"],
+["My father","أبي"],
+["My teacher","أستاذي"],
+["The student","الطالب"],
+["The woman","المرأة"],
+["The man","الرجل"],
+["Our family","عائلتنا"],
+["My friends","أصدقائي"],
+["The children","الأطفال"],
+["The girl","الفتاة"],
+["The boy","الولد"]
+];
+
+const verbs=[
+["learn","يتعلم"],
+["study","يدرس"],
+["work","يعمل"],
+["travel","يسافر"],
+["visit","يزور"],
+["watch","يشاهد"],
+["read","يقرأ"],
+["write","يكتب"],
+["cook","يطبخ"],
+["clean","ينظف"],
+["buy","يشتري"],
+["open","يفتح"],
+["close","يغلق"],
+["call","يتصل"],
+["help","يساعد"],
+["play","يلعب"],
+["walk","يمشي"],
+["drink","يشرب"],
+["eat","يأكل"],
+["listen","يستمع"],
+["practice","يتدرب"],
+["speak","يتحدث"],
+["meet","يقابل"],
+["start","يبدأ"],
+["finish","ينهي"],
+["need","يحتاج"],
+["want","يريد"],
+["like","يحب"],
+["use","يستعمل"],
+["make","يصنع"],
+["take","يأخذ"],
+["bring","يحضر"],
+["choose","يختار"],
+["prepare","يحضر"],
+["remember","يتذكر"],
+["understand","يفهم"],
+["improve","يحسن"],
+["enjoy","يستمتع"]
+];
+
+const objects=[
+["English","الإنجليزية"],
+["a book","كتابًا"],
+["coffee","القهوة"],
+["breakfast","الفطور"],
+["dinner","العشاء"],
+["a new word","كلمة جديدة"],
+["my homework","واجبي"],
+["my room","غرفتي"],
+["the kitchen","المطبخ"],
+["the city","المدينة"],
+["the airport","المطار"],
+["the university","الجامعة"],
+["my friend","صديقي"],
+["my family","عائلتي"],
+["a movie","فيلمًا"],
+["music","الموسيقى"],
+["some water","بعض الماء"],
+["a message","رسالة"],
+["a photo","صورة"],
+["a new language","لغة جديدة"],
+["my plans","خططي"],
+["the bus","الحافلة"],
+["the train","القطار"],
+["a ticket","تذكرة"],
+["a hotel","فندقًا"],
+["a restaurant","مطعمًا"],
+["the answer","الإجابة"],
+["the question","السؤال"],
+["a story","قصة"],
+["a sentence","جملة"]
+];
+
+const times=[
+["every morning","كل صباح"],
+["every day","كل يوم"],
+["every evening","كل مساء"],
+["on weekends","في عطلة نهاية الأسبوع"],
+["after work","بعد العمل"],
+["before class","قبل الدرس"],
+["at night","في الليل"],
+["in the morning","في الصباح"],
+["this week","هذا الأسبوع"],
+["next week","الأسبوع القادم"],
+["tomorrow","غدًا"],
+["today","اليوم"],
+["on Monday","يوم الاثنين"],
+["after dinner","بعد العشاء"],
+["before breakfast","قبل الفطور"],
+["when I have time","عندما يكون لدي وقت"],
+["during the weekend","خلال عطلة نهاية الأسبوع"],
+["after university","بعد الجامعة"],
+["before I sleep","قبل أن أنام"],
+["when I travel","عندما أسافر"]
+];
+
+function isThirdPerson(subject){
+
+const s=subject.toLowerCase().trim();
+
+return ![
+"i",
+"you",
+"we",
+"they"
+].includes(s);
+}
+
+function conjugatePresent(subject,verb){
+
+if(!isThirdPerson(subject))return verb;
+
+if(verb==="have")return "has";
+if(verb==="be")return "is";
+if(verb==="do")return "does";
+
+if(
+verb.endsWith("ch")||
+verb.endsWith("sh")||
+verb.endsWith("x")||
+verb.endsWith("o")||
+verb.endsWith("ss")
+){
+return verb+"es";
+}
+
+if(
+verb.endsWith("y")&&
+!"aeiou".includes(
+verb.charAt(verb.length-2)
+)
+){
+return verb.slice(0,-1)+"ies";
+}
+
+return verb+"s";
+}
+
+const irregularPast={
+go:"went",
+eat:"ate",
+see:"saw",
+take:"took",
+make:"made",
+write:"wrote",
+read:"read",
+speak:"spoke",
+drink:"drank",
+buy:"bought",
+bring:"brought",
+choose:"chose",
+understand:"understood",
+meet:"met",
+have:"had",
+do:"did",
+be:"was"
+};
+
+function pastVerb(v){
+
+if(irregularPast[v])return irregularPast[v];
+
+if(v.endsWith("e"))return v+"d";
+
+if(
+v.endsWith("y")&&
+!"aeiou".includes(v[v.length-2])
+){
+return v.slice(0,-1)+"ied";
+}
+
+return v+"ed";
+}
+
+
+/* =====================================================
+   THINK IN ENGLISH — 1000
+===================================================== */
+
+function makeThinkData(){
+
+const arr=[];
+
+for(let i=0;i<1000;i++){
+
+const p=people[i%people.length];
+const v=verbs[Math.floor(i/people.length)%verbs.length];
+const o=objects[Math.floor(i/(people.length*verbs.length))%objects.length];
+const t=times[Math.floor(i/300)%times.length];
+
+let en;
+let ar;
+
+const mode=i%5;
+
+if(mode===0){
+
+const pv=conjugatePresent(p[0],v[0]);
+
+en=p[0]+" "+pv+" "+o[0]+" "+t[0]+".";
+ar=p[1]+" "+v[1]+" "+o[1]+" "+t[1]+".";
+
+}else if(mode===1){
+
+en=p[0]+" will "+v[0]+" "+o[0]+" "+t[0]+".";
+ar=p[1]+" سوف "+v[1]+" "+o[1]+" "+t[1]+".";
+
+}else if(mode===2){
+
+en=p[0]+" "+pastVerb(v[0])+" "+o[0]+" yesterday.";
+ar=p[1]+" "+v[1]+" "+o[1]+" أمس.";
+
+}else if(mode===3){
+
+en=p[0]+" wants to "+v[0]+" "+o[0]+".";
+ar=p[1]+" يريد/تريد أن "+v[1]+" "+o[1]+".";
+
+}else{
+
+en=p[0]+" is going to "+v[0]+" "+o[0]+" tomorrow.";
+ar=p[1]+" سيذهب/ستذهب إلى "+v[1]+" "+o[1]+" غدًا.";
+
+}
+
+arr.push({en,ar});
+
+}
+
+return arr;
+}
+
+const thinkData=makeThinkData();
+
+let thinkIndex=state.progress.think;
+
+function renderThink(){
+
+if(thinkIndex>=1000){
+document.getElementById("thinkPrompt").innerHTML=
+'<div class="complete-box"><h3>🏆 Think in English Complete!</h3><p>You completed all 1000 sentences.</p></div>';
+return;
+}
+
+const x=thinkData[thinkIndex];
+
+document.getElementById("thinkNumber").textContent=
+thinkIndex+1;
+
+document.getElementById("thinkPrompt").textContent=x.ar;
+document.getElementById("thinkInput").value="";
+document.getElementById("thinkResult").innerHTML="";
+
+renderThinkHistory();
+}
+
+function checkThink(){
+
+const input=document.getElementById("thinkInput").value.trim();
+
+if(!input){
+
+document.getElementById("thinkResult").innerHTML=
+'<div class="result error">✍️ Write your English sentence first.</div>';
+
+return;
+}
+
+const target=thinkData[thinkIndex].en;
+const score=similarity(input,target);
+
+if(score===100){
+
+document.getElementById("thinkResult").innerHTML=`
+
+<div class="result success">
+
+🎉 Perfect! 100%
+
+<br><br>
+
+<b>Correct:</b> ${escapeHTML(target)}
+
+<br><br>
+
+<button class="primary" onclick="nextThink()">
+Save & continue →
+</button>
+
+</div>`;
+
+}else{
+
+document.getElementById("thinkResult").innerHTML=`
+
+<div class="result error">
+
+📝 Not 100% yet.
+
+<br>
+
+Your match: ${score}%
+
+<br><br>
+
+<b>Correct sentence:</b><br>
+${escapeHTML(target)}
+
+<br><br>
+
+Write it again exactly to complete this lesson.
+
+</div>`;
+
+}
+
+}
+
+function nextThink(){
+
+if(thinkIndex>=1000)return;
+
+state.progress.think=thinkIndex+1;
+
+state.history.think.push(thinkData[thinkIndex]);
+
+thinkIndex++;
+
+addXP(20);
+
+renderThink();
+updateStats();
+}
+
+function renderThinkHistory(){
+
+const box=document.getElementById("thinkHistory");
+
+if(!state.history.think.length){
+box.innerHTML='<div class="history-empty">No completed sentences yet. Complete the first one and it will appear here.</div>';
+return;
+}
+
+box.innerHTML="";
+
+state.history.think.slice(-20).forEach((x,i)=>{
+
+box.innerHTML+=`
+<div class="result success" style="margin-bottom:8px">
+<b>✓ Completed ${state.history.think.length-19+i}</b>
+<br>
+${escapeHTML(x.ar)}
+<br>
+🇺🇸 ${escapeHTML(x.en)}
+</div>
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   SPEAK LAB — 1000
+===================================================== */
+
+const speakData=thinkData;
+
+let speakIndex=state.progress.speak;
+
+function renderSpeak(){
+
+if(speakIndex>=1000){
+document.getElementById("speakSentence").innerHTML="🏆 All 1000 sentences completed!";
+document.getElementById("speakArabic").textContent="";
+return;
+}
+
+const x=speakData[speakIndex];
+
+document.getElementById("speakNumber").textContent=
+speakIndex+1;
+
+document.getElementById("speakSentence").textContent=x.en;
+document.getElementById("speakArabic").textContent=x.ar;
+document.getElementById("speakResult").innerHTML="";
+
+renderSpeakHistory();
+}
+
+function speakCurrent(){
+if(speakData[speakIndex])speak(speakData[speakIndex].en,1);
+}
+
+function startSpeaking(){
+
+if(speakIndex>=1000)return;
+
+const Recognition=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
+
+if(!Recognition){
+
+document.getElementById("speakResult").innerHTML=
+'<div class="result error">🎙️ Speech recognition is not available in this browser. Try Safari or Chrome and allow microphone access.</div>';
+
+return;
+}
+
+const recognition=new Recognition();
+
+recognition.lang="en-US";
+recognition.interimResults=false;
+recognition.maxAlternatives=1;
+
+document.getElementById("speakResult").innerHTML=
+'<div class="result">🎙️ Listening... speak now.</div>';
+
+try{
+recognition.start();
+}catch(e){
+return;
+}
+
+recognition.onresult=function(event){
+
+const said=event.results[0][0].transcript;
+const target=speakData[speakIndex].en;
+const score=similarity(said,target);
+
+if(score===100){
+
+document.getElementById("speakResult").innerHTML=`
+
+<div class="result success">
+
+🎉 Perfect!
+
+<br><br>
+
+You said: ${escapeHTML(said)}
+
+<br>
+Match: 100%
+
+<br><br>
+
+<button class="primary" onclick="nextSpeak()">
+Save & continue →
+</button>
+
+</div>`;
+
+}else{
+
+document.getElementById("speakResult").innerHTML=`
+
+<div class="result error">
+
+🎙️ You said:
+${escapeHTML(said)}
+
+<br><br>
+
+Target:
+${escapeHTML(target)}
+
+<br><br>
+
+Match: ${score}%
+
+<br><br>
+
+Repeat the SAME sentence until it matches.
+
+</div>`;
+
+}
+
+};
+
+recognition.onerror=function(e){
+
+document.getElementById("speakResult").innerHTML=
+`<div class="result error">🎙️ ${e.error==="no-speech"?"I didn't hear you. Try again.":"Microphone error. Please check microphone permission."}</div>`;
+
+};
+
+}
+
+function nextSpeak(){
+
+state.progress.speak=speakIndex+1;
+
+state.history.speak.push(speakData[speakIndex]);
+
+speakIndex++;
+
+addXP(20);
+
+renderSpeak();
+}
+
+function renderSpeakHistory(){
+
+const box=document.getElementById("speakHistory");
+
+box.innerHTML="<h3>🗣️ Your completed sentences</h3>";
+
+if(!state.history.speak.length){
+box.innerHTML+='<div class="history-empty">Complete a speaking sentence and it will appear here.</div>';
+return;
+}
+
+state.history.speak.slice(-15).forEach(x=>{
+
+box.innerHTML+=`
+<div class="result success" style="margin-top:8px">
+🇺🇸 ${escapeHTML(x.en)}
+<br>
+🇲🇦 ${escapeHTML(x.ar)}
+</div>
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   LISTENING — 1000
+===================================================== */
+
+function makeListeningData(){
+
+const arr=[];
+
+for(let i=0;i<1000;i++){
+
+const v=verbs[i%verbs.length];
+const o=objects[Math.floor(i/verbs.length)%objects.length];
+const t=times[Math.floor(i/100)%times.length];
+
+let sentence;
+let answer;
+
+if(i%3===0){
+sentence="She "+conjugatePresent("she",v[0])+" "+o[0]+" "+t[0]+".";
+answer="She "+conjugatePresent("she",v[0])+" "+o[0]+".";
+}else if(i%3===1){
+sentence="They will "+v[0]+" "+o[0]+" tomorrow.";
+answer="They will "+v[0]+" "+o[0]+".";
+}else{
+sentence="He "+pastVerb(v[0])+" "+o[0]+" yesterday.";
+answer="He "+pastVerb(v[0])+" "+o[0]+".";
+}
+
+const wrong1="They stay at home.";
+const wrong2="He does something different.";
+
+const options=[answer,wrong1,wrong2];
+
+const shift=i%3;
+
+const shuffled=[
+options[shift],
+options[(shift+1)%3],
+options[(shift+2)%3]
+];
+
+arr.push({
+sentence,
+answer,
+options:shuffled,
+correct:shuffled.indexOf(answer)
+});
+
+}
+
+return arr;
+}
+
+const listeningData=makeListeningData();
+
+let listenIndex=state.progress.listen;
+
+function renderListening(){
+
+if(listenIndex>=1000){
+document.getElementById("listenQuestion").innerHTML=
+'<div class="complete-box"><h3>🏆 Listening Complete!</h3><p>You completed all 1000 questions.</p></div>';
+return;
+}
+
+document.getElementById("listenNumber").textContent=
+listenIndex+1;
+
+const q=listeningData[listenIndex];
+
+let html=`
+
+<div class="result">
+
+<button class="primary"
+onclick="speak(listeningData[listenIndex].sentence, listeningRate)">
+🔊 Play
+</button>
+
+<p style="margin:18px 0;font-weight:800">
+What did you hear?
+</p>
+`;
+
+q.options.forEach((x,i)=>{
+
+html+=`
+<button class="quiz-option"
+onclick="answerListening(${i})">
+${escapeHTML(x)}
+</button>
+`;
+
+});
+
+html+="</div>";
+
+document.getElementById("listenQuestion").innerHTML=html;
+
+renderListenHistory();
+}
+
+let listeningRate=1;
+
+function listenSpeed(rate){
+
+listeningRate=rate;
+
+if(listeningData[listenIndex]){
+speak(listeningData[listenIndex].sentence,rate);
+}
+
+}
+
+function answerListening(index){
+
+const q=listeningData[listenIndex];
+
+if(index===q.correct){
+
+document.getElementById("listenQuestion").innerHTML=`
+
+<div class="result success">
+
+🎉 Correct!
+
+<br><br>
+
+<b>You chose:</b>
+${escapeHTML(q.options[index])}
+
+<br><br>
+
+<button class="primary" onclick="nextListening()">
+Save & continue →
+</button>
+
+</div>`;
+
+}else{
+
+document.getElementById("listenQuestion").innerHTML=`
+
+<div class="result error">
+
+❌ Not correct.
+
+<br>
+
+Listen again and try the SAME question.
+
+<br><br>
+
+<button class="primary"
+onclick="speak(listeningData[listenIndex].sentence,listeningRate)">
+🔊 Listen again
+</button>
+
+<button class="secondary"
+onclick="renderListening()">
+Try again
+</button>
+
+</div>`;
+
+}
+
+}
+
+function nextListening(){
+
+state.progress.listen=listenIndex+1;
+
+state.history.listen.push(listeningData[listenIndex]);
+
+listenIndex++;
+
+addXP(20);
+
+renderListening();
+}
+
+function renderListenHistory(){
+
+const box=document.getElementById("listenHistory");
+
+if(!state.history.listen.length){
+box.innerHTML='<div class="history-empty">Completed listening questions will appear here.</div>';
+return;
+}
+
+box.innerHTML="";
+
+state.history.listen.slice(-12).forEach(x=>{
+
+box.innerHTML+=`
+<div class="result success" style="margin-top:8px">
+🔊 ${escapeHTML(x.sentence)}
+<br>
+✓ ${escapeHTML(x.answer)}
+</div>
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   READING — 400 PROGRESSIVE UNIQUE PASSAGES
+===================================================== */
+
+const readingTopics=[
+"Morning Routine",
+"University Day",
+"Learning English",
+"A Trip to the City",
+"A Visit to the Airport",
+"A New Friend",
+"Shopping Day",
+"A Busy Weekend",
+"Travel Plans",
+"Working and Studying",
+"Learning from Mistakes",
+"Planning the Future",
+"Life in a New City",
+"Meeting New People",
+"Building Good Habits",
+"An Important Decision",
+"A New Opportunity",
+"Learning from Experience",
+"Changing Daily Habits",
+"Understanding Other People"
+];
+
+const readingPeople=[
+"Maya",
+"Adam",
+"Lina",
+"Omar",
+"Sara",
+"Youssef",
+"Nora",
+"Daniel",
+"Emma",
+"Samir"
+];
+
+const readingPlaces=[
+"university",
+"library",
+"city center",
+"airport",
+"small café",
+"local market",
+"train station",
+"community center",
+"bookshop",
+"park"
+];
+
+const readingActions=[
+"study English",
+"read a short book",
+"prepare for class",
+"organize the day",
+"practice speaking",
+"learn new vocabulary",
+"write in a notebook",
+"visit a new place",
+"talk to a classmate",
+"review yesterday's lesson"
+];
+
+const readingLessons=[
+"small daily habits can create useful progress",
+"practice becomes easier when it is part of a routine",
+"mistakes can be useful when we learn from them",
+"patience is important when learning something new",
+"good preparation can make a difficult task easier",
+"asking questions can help us understand better",
+"consistent effort is often more useful than rushing",
+"experience can change the way we see a problem",
+"clear goals can help us decide what to do next",
+"learning becomes stronger when we use knowledge in real situations"
+];
+
+function makeReadingPassage(i){
+
+const levelIndex=Math.floor(i/40);
+const levelNames=[
+"Beginner",
+"Beginner +",
+"Elementary",
+"Elementary +",
+"Pre-Intermediate",
+"Intermediate",
+"Intermediate +",
+"Upper Intermediate",
+"Advanced",
+"Advanced +"
+];
+
+const level=levelNames[Math.min(levelIndex,9)];
+
+const person=readingPeople[i%readingPeople.length];
+const place=readingPlaces[Math.floor(i/readingPeople.length)%readingPlaces.length];
+const action=readingActions[Math.floor(i/(readingPeople.length*readingPlaces.length))%readingActions.length];
+const lesson=readingLessons[i%readingLessons.length];
+const topic=readingTopics[i%readingTopics.length];
+
+let sentences=[];
+
+if(levelIndex===0){
+
+sentences=[
+`${person} has a simple day.`,
+`Every morning, ${person} wakes up early and prepares breakfast.`,
+`After breakfast, ${person} goes to the ${place}.`,
+`Today, ${person} wants to ${action}.`,
+`${person} knows that ${lesson}.`
+];
+
+}else if(levelIndex===1){
+
+sentences=[
+`${person} usually has a quiet morning.`,
+`After getting ready, ${person} goes to the ${place}.`,
+`The first thing ${person} does is ${action}.`,
+`Sometimes the task feels difficult, but ${person} continues.`,
+`By the end of the morning, ${person} feels happy because ${lesson}.`
+];
+
+}else if(levelIndex===2){
+
+sentences=[
+`${person} recently decided to change part of the daily routine.`,
+`Instead of spending the whole morning doing the same things, ${person} now plans the day before leaving home.`,
+`At the ${place}, ${person} spends some time to ${action}.`,
+`This small change has made the day more organized.`,
+`${person} has discovered that ${lesson}.`
+];
+
+}else if(levelIndex===3){
+
+sentences=[
+`For several weeks, ${person} has been trying to create a better routine.`,
+`The goal is not to become perfect, but to make steady progress.`,
+`At the ${place}, ${person} usually chooses one useful activity, such as deciding to ${action}.`,
+`When something goes wrong, ${person} writes down what happened and considers what could be improved.`,
+`This approach has taught ${person} that ${lesson}.`
+];
+
+}else if(levelIndex===4){
+
+sentences=[
+`At the beginning of the year, ${person} noticed that daily responsibilities were becoming difficult to organize.`,
+`There were classes, personal tasks, and several goals that all seemed important at the same time.`,
+`To solve the problem, ${person} created a simple schedule and reserved a specific period for ${action}.`,
+`The schedule was not perfect, and it had to be changed several times.`,
+`However, these changes helped ${person} understand that ${lesson}.`
+];
+
+}else if(levelIndex===5){
+
+sentences=[
+`${person}'s experience at the ${place} gradually changed the way ${person} approached learning.`,
+`Instead of waiting until a subject became difficult, ${person} began reviewing small amounts of information regularly.`,
+`One part of the routine involved choosing a practical goal, such as deciding to ${action}.`,
+`Although progress was sometimes slow, the regular practice made unfamiliar tasks easier.`,
+`Eventually, ${person} realized that ${lesson}.`
+];
+
+}else if(levelIndex===6){
+
+sentences=[
+`Over time, ${person} began to notice a connection between daily habits and long-term results.`,
+`The change was not dramatic at first; it appeared through small decisions made repeatedly.`,
+`For example, a short visit to the ${place} could become an opportunity to ${action}, reflect on a problem, or learn something unexpected.`,
+`When difficulties appeared, ${person} stopped looking for an immediate solution and instead considered several possible approaches.`,
+`This experience demonstrated that ${lesson}.`
+];
+
+}else if(levelIndex===7){
+
+sentences=[
+`What began as an ordinary routine eventually became an experiment in how people learn and adapt.`,
+`${person} observed that motivation could change from one day to another, while a well-designed routine could provide stability.`,
+`At the ${place}, ${person} therefore focused less on finishing quickly and more on understanding why a particular activity was useful.`,
+`The decision to ${action} became part of a broader strategy involving reflection, repetition, and gradual improvement.`,
+`Although the results were not always visible immediately, the process confirmed that ${lesson}.`
+];
+
+}else if(levelIndex===8){
+
+sentences=[
+`As ${person} gained experience, the idea of progress became more complex than simply completing a list of tasks.`,
+`A productive routine required attention to priorities, the ability to adjust plans, and enough patience to recognize improvements that were difficult to measure.`,
+`During a visit to the ${place}, ${person} used the opportunity to ${action} while also considering how previous experiences had influenced current decisions.`,
+`Rather than treating mistakes as evidence of failure, ${person} began examining them as information that could reveal weaknesses in the learning process.`,
+`This perspective eventually led to the conclusion that ${lesson}.`
+];
+
+}else{
+
+sentences=[
+`The experience of ${person} illustrates how gradual changes in behavior can influence both practical results and the way a person understands learning itself.`,
+`At first, the decision to spend more time at the ${place} and deliberately ${action} seemed like a minor adjustment rather than a significant transformation.`,
+`Yet repeated practice created opportunities to notice patterns, question assumptions, and develop strategies that were more effective than simply relying on motivation.`,
+`When unexpected difficulties appeared, ${person} learned to evaluate the situation from several perspectives instead of immediately judging the result as positive or negative.`,
+`In the long term, this approach suggested that ${lesson}, especially when improvement is viewed as an ongoing process rather than a final destination.`
+];
+
+}
+
+const paragraph=sentences.join(" ");
+
+return{
+title:topic+" — Level "+(levelIndex+1),
+level,
+paragraph,
+words:[
+["improve","يحسن"],
+["practice","يتدرب"],
+["opportunity","فرصة"],
+["context","سياق"],
+["experience","تجربة"]
+],
+mainIdea:lesson
+};
+
+}
+
+const readingData=Array.from(
+{length:400},
+(_,i)=>makeReadingPassage(i)
+);
+
+function readingDistractors(correct,i){
+
+const distractors=[
+"The passage is mainly about preparing a complicated meal.",
+"The passage is mainly about buying clothes in a large shop.",
+"The passage is mainly about repairing a broken machine.",
+"The passage is mainly about choosing a new phone.",
+"The passage is mainly about playing a competitive sport.",
+"The passage is mainly about visiting a crowded restaurant.",
+"The passage is mainly about decorating a new house.",
+"The passage is mainly about looking for a lost object."
+];
+
+const start=i%distractors.length;
+
+return[
+distractors[start],
+distractors[(start+1)%distractors.length],
+distractors[(start+2)%distractors.length],
+distractors[(start+3)%distractors.length]
+].filter(x=>x!==correct);
+}
+
+function makeReadingOptions(r,i){
+
+const correct=
+"The passage is mainly about how "+r.mainIdea+".";
+
+const wrongs=readingDistractors(correct,i).slice(0,4);
+
+const all=[
+correct,
+...wrongs
+];
+
+const shift=i%5;
+
+return{
+options:[
+all[shift],
+all[(shift+1)%5],
+all[(shift+2)%5],
+all[(shift+3)%5],
+all[(shift+4)%5]
+],
+correct:shift===0?0:
+shift===1?4:
+shift===2?3:
+shift===3?2:1
+};
+
+}
+
+/*
+Because the correct answer is intentionally moved to a different
+position on every passage, the user cannot simply memorize
+"the first answer".
+*/
+
+readingData.forEach((r,i)=>{
+
+const q=makeReadingOptions(r,i);
+
+r.options=q.options;
+r.correct=q.options.indexOf(
+"The passage is mainly about how "+r.mainIdea+"."
+);
+
+});
+
+let readingIndex=state.progress.reading;
+
+function renderReading(){
+
+if(readingIndex>=400){
+
+document.getElementById("readingText").innerHTML=
+'<div class="complete-box"><h3>🏆 Reading Complete!</h3><p>You completed all 400 passages.</p></div>';
+
+document.getElementById("readingQuestion").innerHTML="";
+return;
+}
+
+const r=readingData[readingIndex];
+
+document.getElementById("readingNumber").textContent=
+readingIndex+1;
+
+document.getElementById("readingLevel").innerHTML=
+`<span class="reading-level">${escapeHTML(r.level)}</span>`;
+
+document.getElementById("readingDifficulty").textContent=
+"Level "+(Math.floor(readingIndex/40)+1)+" / 10";
+
+document.getElementById("readingWordsCount").textContent=
+r.paragraph.split(/\s+/).length+" words";
+
+document.getElementById("readingTitle").textContent=
+r.title;
+
+document.getElementById("readingText").textContent=
+r.paragraph;
+
+const words=document.getElementById("readingWords");
+
+words.innerHTML="";
+
+r.words.forEach(x=>{
+
+const b=document.createElement("button");
+
+b.className="word";
+b.textContent=x[0];
+
+b.onclick=()=>{
+
+speak(x[0],.8);
+
+document.getElementById("readingQuestion").insertAdjacentHTML(
+"beforeend",
+`<div class="result">
+<b>${escapeHTML(x[0])}</b> — ${escapeHTML(x[1])}
+</div>`
+);
+
+};
+
+words.appendChild(b);
+
+});
+
+document.getElementById("readingQuestion").innerHTML=`
+
+<div class="reading-question-title">
+🧠 What is the real main idea of this passage?
+</div>
+
+<p class="small">
+Choose the best meaning. There are five choices.
+</p>
+
+`;
+
+r.options.forEach((option,i)=>{
+
+document.getElementById("readingQuestion").innerHTML+=`
+
+<button class="quiz-option"
+onclick="readingAnswer(${i})">
+${escapeHTML(option)}
+</button>
+
+`;
+
+});
+
+renderReadingHistory();
+}
+
+function readingAnswer(index){
+
+const r=readingData[readingIndex];
+
+if(index===r.correct){
+
+document.getElementById("readingQuestion").innerHTML=`
+
+<div class="result success">
+
+🎉 Correct! You understood the passage.
+
+<br><br>
+
+<b>Main idea:</b><br>
+${escapeHTML(r.options[r.correct])}
+
+<br><br>
+
+<button class="primary" onclick="nextReading()">
+Save reading & continue →
+</button>
+
+</div>`;
+
+}else{
+
+document.getElementById("readingQuestion").innerHTML=`
+
+<div class="result error">
+
+❌ Not quite.
+
+<br><br>
+
+Read the passage again and think about its main idea.
+
+<br><br>
+
+<b>You must answer this same passage correctly before moving forward.</b>
+
+<br><br>
+
+<button class="secondary" onclick="renderReading()">
+↻ Read again
+</button>
+
+</div>`;
+
+}
+
+}
+
+function nextReading(){
+
+state.progress.reading=readingIndex+1;
+
+state.history.reading.push({
+title:readingData[readingIndex].title,
+level:readingData[readingIndex].level,
+paragraph:readingData[readingIndex].paragraph,
+answer:readingData[readingIndex].options[readingData[readingIndex].correct]
+});
+
+readingIndex++;
+
+addXP(15);
+
+renderReading();
+}
+
+function renderReadingHistory(){
+
+const box=document.getElementById("readingHistory");
+
+if(!state.history.reading.length){
+
+box.innerHTML=
+'<div class="history-empty">Complete your first reading and it will be saved here.</div>';
+
+return;
+}
+
+box.innerHTML="";
+
+state.history.reading.slice(-10).forEach((x,i)=>{
+
+box.innerHTML+=`
+<div class="result success" style="margin-top:8px">
+
+<b>✓ Completed reading</b>
+
+<br>
+
+📖 ${escapeHTML(x.title)}
+
+<br>
+
+<span class="small">${escapeHTML(x.level)}</span>
+
+<br><br>
+
+${escapeHTML(x.answer)}
+
+</div>
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   WRITING — 500
+===================================================== */
+
+const writingPrompts=[
+"Write 3 sentences about your morning.",
+"Describe your university.",
+"Write about what you usually do after waking up.",
+"Describe your favorite food.",
+"Write about a city you would like to visit.",
+"Describe your best friend.",
+"Write about your plans for tomorrow.",
+"Explain why you are learning English.",
+"Describe a normal weekend.",
+"Write about a place where you feel comfortable.",
+"Describe a difficult day and how you handled it.",
+"Write about a skill you want to improve.",
+"Explain what makes a good friend.",
+"Describe your ideal trip.",
+"Write about something you learned recently."
+];
+
+function getWritingPrompt(i){
+
+const base=writingPrompts[i%writingPrompts.length];
+
+if(i<100)return base;
+
+if(i<200)return base+" Use at least one past-tense sentence.";
+
+if(i<300)return base+" Use present, past, and future sentences.";
+
+if(i<400)return base+" Give reasons and connect your ideas with because, but, so, or although.";
+
+return base+" Write a short organized paragraph with a clear beginning, middle, and ending.";
+}
+
+let writingIndex=state.progress.writing;
+
+function renderWriting(){
+
+document.getElementById("writingNumber").textContent=
+writingIndex+1;
+
+document.getElementById("writingPrompt").textContent=
+getWritingPrompt(writingIndex);
+
+document.getElementById("writingInput").value="";
+document.getElementById("writingResult").innerHTML="";
+
+renderWritingHistory();
+}
+
+function writingErrors(text){
+
+const errors=[];
+
+if(/\bi am go\b/i.test(text))
+errors.push("Use “I am going”, not “I am go”.");
+
+if(/\bhe go\b/i.test(text))
+errors.push("Use “he goes” in the present simple.");
+
+if(/\bshe go\b/i.test(text))
+errors.push("Use “she goes” in the present simple.");
+
+if(/\bi goes\b/i.test(text))
+errors.push("Use “I go”, not “I goes”.");
+
+if(/\bdid went\b/i.test(text))
+errors.push("After “did”, use the base verb: did go.");
+
+if(/\bwill went\b/i.test(text))
+errors.push("After “will”, use the base verb: will go.");
+
+if(/\bmore better\b/i.test(text))
+errors.push("Use “better”, not “more better”.");
+
+if(/\bpeople is\b/i.test(text))
+errors.push("Use “people are”.");
+
+if(/\bhe have\b/i.test(text))
+errors.push("Use “he has”.");
+
+if(/\bshe have\b/i.test(text))
+errors.push("Use “she has”.");
+
+if(/\bi has\b/i.test(text))
+errors.push("Use “I have”.");
+
+if(/\bthey was\b/i.test(text))
+errors.push("Use “they were”.");
+
+if(/\bwe was\b/i.test(text))
+errors.push("Use “we were”.");
+
+return errors;
+}
+
+function checkWriting(){
+
+const text=document.getElementById("writingInput").value.trim();
+
+if(text.length<25){
+
+document.getElementById("writingResult").innerHTML=
+`<div class="result error">
+✍️ Your paragraph is too short. Write a little more so you can practice properly.
+</div>`;
+
+return;
+}
+
+const errors=writingErrors(text);
+
+if(errors.length){
+
+document.getElementById("writingResult").innerHTML=`
+
+<div class="result error">
+
+❌ Correct these points before moving forward:
+
+<br><br>
+
+${errors.map(e=>"• "+escapeHTML(e)).join("<br>")}
+
+<br><br>
+
+Rewrite your paragraph and check again.
+
+</div>`;
+
+return;
+}
+
+document.getElementById("writingResult").innerHTML=`
+
+<div class="result success">
+
+🎉 No mistakes detected by the current checker.
+
+<br><br>
+
+<button class="primary" onclick="nextWriting()">
+Save & continue →
+</button>
+
+</div>`;
+
+}
+
+function nextWriting(){
+
+state.progress.writing=writingIndex+1;
+
+state.history.writing.push({
+prompt:getWritingPrompt(writingIndex),
+answer:document.getElementById("writingInput").value.trim()
+});
+
+writingIndex++;
+
+addXP(20);
+
+renderWriting();
+}
+
+function renderWritingHistory(){
+
+const box=document.getElementById("writingHistory");
+
+if(!state.history.writing.length){
+
+box.innerHTML=
+'<div class="history-empty">Your completed writing tasks will appear here.</div>';
+
+return;
+}
+
+box.innerHTML="";
+
+state.history.writing.slice(-8).forEach(x=>{
+
+box.innerHTML+=`
+<div class="result success" style="margin-top:8px">
+<b>Prompt:</b> ${escapeHTML(x.prompt)}
+<br><br>
+${escapeHTML(x.answer)}
+</div>
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   SENTENCE BUILDER — 1000
+===================================================== */
+
+function makeBuilderData(){
+
+return thinkData.map(x=>{
+
+const words=x.en.replace(/[.?!]/g,"").split(" ");
+
+return{
+ar:x.ar,
+en:x.en,
+words
+};
+
+});
+
+}
+
+const builderData=makeBuilderData();
+
+let builderIndex=state.progress.builder;
+let builderChosen=[];
+
+function renderBuilder(){
+
+if(builderIndex>=1000){
+document.getElementById("builderArabic").innerHTML=
+'<div class="complete-box"><h3>🏆 Builder Complete!</h3><p>You completed all 1000 sentences.</p></div>';
+return;
+}
+
+const x=builderData[builderIndex];
+
+document.getElementById("builderNumber").textContent=
+builderIndex+1;
+
+document.getElementById("builderArabic").textContent=x.ar;
+
+builderChosen=[];
+
+const container=document.getElementById("builderWords");
+
+container.innerHTML="";
+
+const shuffled=[...x.words];
+
+for(let i=shuffled.length-1;i>0;i--){
+
+const j=Math.floor(Math.random()*(i+1));
+
+[shuffled[i],shuffled[j]]=
+[shuffled[j],shuffled[i]];
+
+}
+
+shuffled.forEach((word)=>{
+
+const b=document.createElement("button");
+
+b.className="word";
+b.textContent=word;
+
+b.onclick=()=>chooseBuilderWord(b,word);
+
+container.appendChild(b);
+
+});
+
+document.getElementById("builderResult").innerHTML="";
+
+renderBuilderHistory();
+}
+
+function chooseBuilderWord(button,word){
+
+button.disabled=true;
+button.style.opacity=".45";
+
+builderChosen.push(word);
+
+const current=builderChosen.join(" ");
+
+document.getElementById("builderResult").innerHTML=
+`<div class="result">${escapeHTML(current)}</div>`;
+
+const target=builderData[builderIndex].en
+.replace(/[.?!]/g,"");
+
+if(builderChosen.length===target.split(" ").length){
+
+if(normalize(current)===normalize(target)){
+
+document.getElementById("builderResult").innerHTML=`
+
+<div class="result success">
+
+🎉 Perfect!
+
+<br>
+${escapeHTML(builderData[builderIndex].en)}
+
+<br><br>
+
+<button class="primary" onclick="nextBuilder()">
+Save & continue →
+</button>
+
+</div>`;
+
+}else{
+
+document.getElementById("builderResult").innerHTML=`
+
+<div class="result error">
+
+❌ The order is not correct.
+
+<br><br>
+
+<button class="secondary" onclick="resetBuilder()">
+↻ Try again
+</button>
+
+</div>`;
+
+}
+
+}
+
+}
+
+function resetBuilder(){
+renderBuilder();
+}
+
+function nextBuilder(){
+
+state.progress.builder=builderIndex+1;
+
+state.history.builder.push(
+builderData[builderIndex]
+);
+
+builderIndex++;
+
+addXP(15);
+
+renderBuilder();
+}
+
+function renderBuilderHistory(){
+
+const box=document.getElementById("builderHistory");
+
+if(!state.history.builder.length){
+
+box.innerHTML=
+'<div class="history-empty">Completed sentences will appear here.</div>';
+
+return;
+}
+
+box.innerHTML="";
+
+state.history.builder.slice(-10).forEach(x=>{
+
+box.innerHTML+=`
+<div class="result success" style="margin-top:8px">
+🇲🇦 ${escapeHTML(x.ar)}
+<br>
+🇺🇸 ${escapeHTML(x.en)}
+</div>
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   VOCABULARY WORLDS
+===================================================== */
+
+const vocabulary={
+
+"👗 Clothes":[
+["dress","فستان","👗"],
+["shirt","قميص","👕"],
+["T-shirt","قميص قصير","👕"],
+["blouse","بلوزة","👚"],
+["skirt","تنورة","👗"],
+["trousers","بنطال","👖"],
+["jeans","جينز","👖"],
+["jacket","سترة","🧥"],
+["coat","معطف","🧥"],
+["sweater","كنزة","🧶"],
+["hoodie","هودي","👚"],
+["scarf","وشاح","🧣"],
+["gloves","قفازات","🧤"],
+["hat","قبعة","👒"],
+["belt","حزام","👖"],
+["socks","جوارب","🧦"],
+["pajamas","ملابس نوم","😴"],
+["shoes","أحذية","👟"],
+["sneakers","أحذية رياضية","👟"],
+["boots","جزمة","🥾"],
+["heels","كعب عالٍ","👠"],
+["slippers","شبشب منزلي","🥿"],
+["uniform","زي موحد","👔"]
+],
+
+"🧍 Body":[
+["head","الرأس","🧑"],
+["hair","الشعر","💇"],
+["face","الوجه","🙂"],
+["forehead","الجبهة","🙂"],
+["eye","العين","👁️"],
+["eyebrow","الحاجب","🤨"],
+["ear","الأذن","👂"],
+["nose","الأنف","👃"],
+["cheek","الخد","😊"],
+["mouth","الفم","👄"],
+["lip","الشفة","💋"],
+["tooth","سن","🦷"],
+["tongue","اللسان","👅"],
+["chin","الذقن","🙂"],
+["neck","الرقبة","🧍"],
+["shoulder","الكتف","💪"],
+["arm","الذراع","💪"],
+["hand","اليد","✋"],
+["finger","الإصبع","☝️"],
+["thumb","الإبهام","👍"],
+["chest","الصدر","🫁"],
+["back","الظهر","🧍"],
+["waist","الخصر","🧍"],
+["stomach","المعدة / البطن","🫃"],
+["hip","الورك","🧍"],
+["leg","الساق","🦵"],
+["thigh","الفخذ","🦵"],
+["knee","الركبة","🦵"],
+["foot","القدم","🦶"],
+["toe","إصبع القدم","🦶"],
+["heart","القلب","❤️"],
+["brain","الدماغ","🧠"],
+["lung","الرئة","🫁"],
+["bone","العظم","🦴"],
+["muscle","العضلة","💪"],
+["blood","الدم","🩸"],
+["skin","الجلد","🖐️"]
+],
+
+"🎨 Colors":[
+["red","أحمر","🔴"],
+["blue","أزرق","🔵"],
+["yellow","أصفر","🟡"],
+["green","أخضر","🟢"],
+["orange","برتقالي","🟠"],
+["purple","بنفسجي","🟣"],
+["pink","وردي","🩷"],
+["brown","بني","🟤"],
+["black","أسود","⚫"],
+["white","أبيض","⚪"],
+["gray","رمادي","🩶"],
+["gold","ذهبي","🥇"],
+["silver","فضي","🥈"],
+["beige","بيج","🟫"],
+["turquoise","فيروزي","🩵"],
+["navy","كحلي","🔵"],
+["sky blue","أزرق سماوي","🩵"],
+["dark blue","أزرق داكن","🔵"],
+["light blue","أزرق فاتح","🔵"],
+["dark green","أخضر داكن","🟢"],
+["light green","أخضر فاتح","🟢"],
+["olive","زيتي","🫒"],
+["khaki","كاكي","🟫"],
+["burgundy","عنابي","🔴"],
+["coral","مرجاني","🪸"],
+["peach","خوخي","🍑"],
+["lavender","لافندر","💜"],
+["cream","كريمي","🤍"]
+],
+
+"🍎 Fruits":[
+["apple","تفاح","🍎"],
+["banana","موز","🍌"],
+["orange","برتقال","🍊"],
+["lemon","ليمون","🍋"],
+["grape","عنب","🍇"],
+["strawberry","فراولة","🍓"],
+["watermelon","بطيخ","🍉"],
+["melon","شمام","🍈"],
+["peach","خوخ","🍑"],
+["pear","إجاص","🍐"],
+["pineapple","أناناس","🍍"],
+["mango","مانجو","🥭"],
+["kiwi","كيوي","🥝"],
+["cherry","كرز","🍒"],
+["blueberry","توت أزرق","🫐"],
+["raspberry","توت العليق","🫐"],
+["pomegranate","رمان","❤️"],
+["fig","تين","🟣"],
+["date","تمر","🌴"],
+["coconut","جوز الهند","🥥"],
+["papaya","بابايا","🍊"],
+["apricot","مشمش","🍑"],
+["plum","برقوق","🟣"],
+["avocado","أفوكادو","🥑"]
+],
+
+"🥕 Vegetables":[
+["carrot","جزر","🥕"],
+["potato","بطاطس","🥔"],
+["tomato","طماطم","🍅"],
+["onion","بصل","🧅"],
+["garlic","ثوم","🧄"],
+["pepper","فلفل","🌶️"],
+["bell pepper","فلفل حلو","🫑"],
+["cucumber","خيار","🥒"],
+["lettuce","خس","🥬"],
+["spinach","سبانخ","🥬"],
+["cabbage","ملفوف","🥬"],
+["broccoli","بروكلي","🥦"],
+["cauliflower","قرنبيط","🥦"],
+["eggplant","باذنجان","🍆"],
+["zucchini","كوسة","🥒"],
+["peas","بازلاء","🫛"],
+["beans","فاصوليا","🫘"],
+["corn","ذرة","🌽"],
+["mushroom","فطر","🍄"],
+["celery","كرفس","🌿"],
+["beetroot","شمندر","🫜"],
+["turnip","لفت","🫜"],
+["pumpkin","يقطين","🎃"],
+["sweet potato","بطاطا حلوة","🍠"],
+["ginger","زنجبيل","🫚"],
+["leek","كراث","🌿"],
+["okra","بامية","🌿"]
+],
+
+"🍕 Food & Meals":[
+["bread","خبز","🍞"],
+["rice","أرز","🍚"],
+["pasta","معكرونة","🍝"],
+["pizza","بيتزا","🍕"],
+["burger","برغر","🍔"],
+["sandwich","ساندويتش","🥪"],
+["soup","حساء","🍲"],
+["salad","سلطة","🥗"],
+["chicken","دجاج","🍗"],
+["beef","لحم بقري","🥩"],
+["lamb","لحم غنم","🍖"],
+["fish","سمك","🐟"],
+["egg","بيض","🥚"],
+["cheese","جبن","🧀"],
+["yogurt","زبادي","🥛"],
+["milk","حليب","🥛"],
+["butter","زبدة","🧈"],
+["oil","زيت","🫗"],
+["olive oil","زيت الزيتون","🫒"],
+["salt","ملح","🧂"],
+["sugar","سكر","🍬"],
+["tea","شاي","🍵"],
+["coffee","قهوة","☕"],
+["water","ماء","💧"],
+["juice","عصير","🧃"],
+["honey","عسل","🍯"],
+["jam","مربى","🍓"],
+["flour","دقيق","🌾"],
+["sauce","صلصة","🥫"],
+["breakfast","فطور","🍳"],
+["lunch","غداء","🍽️"],
+["dinner","عشاء","🍽️"],
+["dessert","حلوى","🍰"],
+["chocolate","شوكولاتة","🍫"],
+["cake","كعكة","🎂"],
+["ice cream","مثلجات","🍦"]
+],
+
+"🏠 Home":[
+["house","منزل","🏠"],
+["apartment","شقة","🏢"],
+["room","غرفة","🚪"],
+["bedroom","غرفة النوم","🛏️"],
+["living room","غرفة المعيشة","🛋️"],
+["kitchen","مطبخ","🍳"],
+["bathroom","حمام","🛁"],
+["toilet","مرحاض","🚽"],
+["balcony","شرفة","🌇"],
+["garden","حديقة","🌳"],
+["door","باب","🚪"],
+["window","نافذة","🪟"],
+["wall","حائط","🧱"],
+["floor","أرضية","🏠"],
+["ceiling","سقف","🏠"],
+["stairs","درج","🪜"],
+["bed","سرير","🛏️"],
+["pillow","وسادة","🛏️"],
+["blanket","بطانية","🛌"],
+["sofa","أريكة","🛋️"],
+["chair","كرسي","🪑"],
+["table","طاولة","🪑"],
+["desk","مكتب","🖥️"],
+["lamp","مصباح","💡"],
+["mirror","مرآة","🪞"],
+["carpet","سجادة","🟫"],
+["curtain","ستارة","🪟"],
+["fridge","ثلاجة","🧊"],
+["oven","فرن","🔥"],
+["microwave","ميكروويف","📡"],
+["sink","حوض","🚰"],
+["shower","دش","🚿"],
+["bathtub","حوض استحمام","🛁"],
+["washing machine","غسالة","🧺"],
+["television","تلفاز","📺"],
+["remote","جهاز تحكم","🎮"],
+["key","مفتاح","🔑"],
+["cupboard","خزانة","🗄️"],
+["wardrobe","خزانة ملابس","👚"],
+["drawer","درج خزانة","🗄️"]
+],
+
+"✈️ Travel":[
+["airport","المطار","✈️"],
+["passport","جواز السفر","🛂"],
+["visa","تأشيرة","📄"],
+["ticket","تذكرة","🎫"],
+["boarding pass","بطاقة الصعود","🎫"],
+["flight","رحلة جوية","✈️"],
+["airplane","طائرة","✈️"],
+["pilot","طيار","👨‍✈️"],
+["flight attendant","مضيف/مضيفة","👩‍✈️"],
+["airport security","أمن المطار","🛂"],
+["passport control","مراقبة الجوازات","🛂"],
+["customs","الجمارك","🛃"],
+["immigration","الهجرة","🛂"],
+["check-in","تسجيل الوصول","🛄"],
+["gate","بوابة","🚪"],
+["terminal","مبنى المطار","🏢"],
+["departure","المغادرة","🛫"],
+["arrival","الوصول","🛬"],
+["baggage","الأمتعة","🧳"],
+["luggage","الأمتعة","🧳"],
+["suitcase","حقيبة سفر","🧳"],
+["backpack","حقيبة ظهر","🎒"],
+["hotel","فندق","🏨"],
+["reservation","حجز","📅"],
+["reception","الاستقبال","🛎️"],
+["taxi","سيارة أجرة","🚕"],
+["bus","حافلة","🚌"],
+["train","قطار","🚆"],
+["station","محطة","🚉"],
+["map","خريطة","🗺️"],
+["address","عنوان","📍"],
+["street","شارع","🛣️"],
+["emergency","طوارئ","🚨"],
+["police","شرطة","👮"],
+["hospital","مستشفى","🏥"],
+["pharmacy","صيدلية","💊"],
+["restaurant","مطعم","🍽️"],
+["menu","قائمة الطعام","📋"],
+["bill","الفاتورة","🧾"],
+["cash","نقد","💵"],
+["card","بطاقة","💳"],
+["help","مساعدة","🆘"]
+],
+
+"❤️ Feelings":[
+["happy","سعيد","😊"],
+["sad","حزين","😢"],
+["angry","غاضب","😠"],
+["upset","منزعج","😣"],
+["excited","متحمس","🤩"],
+["nervous","متوتر","😰"],
+["calm","هادئ","😌"],
+["relaxed","مسترخٍ","😌"],
+["tired","متعب","😴"],
+["sleepy","نعسان","🥱"],
+["scared","خائف","😨"],
+["worried","قلق","😟"],
+["surprised","متفاجئ","😲"],
+["confused","مرتبك","😵"],
+["bored","يشعر بالملل","🥱"],
+["lonely","وحيد","🥺"],
+["proud","فخور","🥰"],
+["shy","خجول","😊"],
+["embarrassed","محرج","😳"],
+["jealous","غيور","💚"],
+["hopeful","متفائل","🌷"],
+["grateful","ممتن","🙏"],
+["comfortable","مرتاح","😌"],
+["uncomfortable","غير مرتاح","😣"],
+["confident","واثق","💪"],
+["curious","فضولي","🔎"],
+["interested","مهتم","👀"],
+["disappointed","خائب الأمل","😞"],
+["satisfied","راضٍ","😊"]
+],
+
+"🌦️ Weather":[
+["spring","الربيع","🌸"],
+["summer","الصيف","☀️"],
+["autumn","الخريف","🍂"],
+["winter","الشتاء","❄️"],
+["hot","حار","🔥"],
+["cold","بارد","🥶"],
+["warm","دافئ","🌤️"],
+["cool","بارد قليلاً","🍃"],
+["sunny","مشمس","☀️"],
+["rainy","ممطر","🌧️"],
+["cloudy","غائم","☁️"],
+["windy","عاصف","💨"],
+["stormy","عاصف جدًا","⛈️"],
+["snowy","مثلج","❄️"],
+["foggy","ضبابي","🌫️"],
+["humid","رطب","💧"],
+["dry","جاف","🏜️"],
+["rain","مطر","🌧️"],
+["snow","ثلج","❄️"],
+["cloud","سحابة","☁️"],
+["wind","رياح","💨"],
+["thunder","رعد","⚡"],
+["lightning","برق","🌩️"],
+["rainbow","قوس قزح","🌈"],
+["temperature","درجة الحرارة","🌡️"],
+["sun","شمس","☀️"],
+["moon","قمر","🌙"],
+["sky","سماء","🌌"]
+],
+
+"🎓 University":[
+["university","جامعة","🎓"],
+["student","طالب","🧑‍🎓"],
+["teacher","أستاذ","👩‍🏫"],
+["class","قسم","🏫"],
+["course","مادة","📚"],
+["lesson","درس","📖"],
+["exam","امتحان","📝"],
+["homework","واجب","✏️"],
+["library","مكتبة","📚"],
+["book","كتاب","📕"],
+["notebook","دفتر","📓"],
+["pen","قلم","🖊️"],
+["question","سؤال","❓"],
+["answer","إجابة","✅"],
+["subject","مادة دراسية","📚"],
+["grade","نقطة / علامة","💯"],
+["schedule","جدول","📅"],
+["semester","فصل دراسي","🗓️"],
+["degree","شهادة","🎓"],
+["classmate","زميل الدراسة","👥"]
+],
+
+"💼 Work":[
+["office","مكتب","🏢"],
+["manager","مدير","👔"],
+["employee","موظف","🧑‍💼"],
+["customer","زبون","🧑"],
+["meeting","اجتماع","🤝"],
+["email","بريد إلكتروني","📧"],
+["computer","حاسوب","💻"],
+["phone","هاتف","📱"],
+["document","وثيقة","📄"],
+["file","ملف","📁"],
+["printer","طابعة","🖨️"],
+["company","شركة","🏢"],
+["salary","راتب","💵"],
+["contract","عقد","📄"],
+["job","عمل","💼"],
+["career","مسار مهني","📈"],
+["interview","مقابلة","🗣️"],
+["experience","خبرة","⭐"],
+["skill","مهارة","🧠"],
+["schedule","جدول","📅"]
+]
+
+};
+
+function renderVocabularyCategories(){
+
+const box=document.getElementById("vocabCategories");
+
+box.className="vocab-category-grid";
+box.innerHTML="";
+
+Object.entries(vocabulary).forEach(([category,items])=>{
+
+const div=document.createElement("div");
+
+div.className="vocab-category";
+
+const icon=category.split(" ")[0];
+const title=category.substring(icon.length).trim();
+
+div.innerHTML=`
+<div class="vocab-category-icon">${icon}</div>
+<div class="vocab-category-title">${escapeHTML(title)}</div>
+<div class="vocab-category-count">${items.length} words</div>
+`;
+
+div.onclick=()=>openVocabCategory(category);
+
+box.appendChild(div);
+
+});
+
+}
+
+function openVocabCategory(category){
+
+const wordsBox=document.getElementById("vocabWords");
+
+document.getElementById("vocabCategories")
+.classList.add("hidden");
+
+wordsBox.classList.remove("hidden");
+
+wordsBox.innerHTML=`
+
+<button class="back" onclick="closeVocabCategory()">
+← Vocabulary Worlds
+</button>
+
+<h3 class="category-title">${escapeHTML(category)}</h3>
+
+<div class="vocab-grid" id="selectedVocabGrid"></div>
+`;
+
+const grid=document.getElementById("selectedVocabGrid");
+
+vocabulary[category].forEach(item=>{
+
+const card=document.createElement("div");
+
+card.className="vocab-item";
+
+card.innerHTML=`
+<div class="vocab-picture">${item[2]}</div>
+<div class="vocab-word">${escapeHTML(item[0])}</div>
+<div class="vocab-ar">${escapeHTML(item[1])}</div>
+<button class="mic">🔊</button>
+`;
+
+card.querySelector(".mic").onclick=()=>{
+
+speak(item[0],.8);
+
+if(!card.dataset.learned){
+
+card.dataset.learned="true";
+
+state.progress.vocabulary=
+Math.min(100,state.progress.vocabulary+1);
+
+addXP(1);
+}
+
+};
+
+grid.appendChild(card);
+
+});
+
+}
+
+function closeVocabCategory(){
+
+document.getElementById("vocabWords")
+.classList.add("hidden");
+
+document.getElementById("vocabCategories")
+.classList.remove("hidden");
+
+}
+
+function searchVocabulary(){
+
+const value=
+document.getElementById("vocabSearch").value
+.toLowerCase()
+.trim();
+
+if(!value){
+
+renderVocabularyCategories();
+document.getElementById("vocabWords").classList.add("hidden");
+return;
+}
+
+const wordsBox=document.getElementById("vocabWords");
+
+document.getElementById("vocabCategories")
+.classList.add("hidden");
+
+wordsBox.classList.remove("hidden");
+
+wordsBox.innerHTML=`
+<button class="back" onclick="closeVocabCategory()">
+← Vocabulary Worlds
+</button>
+<div class="vocab-grid" id="searchGrid"></div>
+`;
+
+const grid=document.getElementById("searchGrid");
+
+Object.values(vocabulary)
+.flat()
+.filter(x=>
+x[0].toLowerCase().includes(value)||
+x[1].includes(value)
+)
+.forEach(item=>{
+
+const card=document.createElement("div");
+
+card.className="vocab-item";
+
+card.innerHTML=`
+<div class="vocab-picture">${item[2]}</div>
+<div class="vocab-word">${escapeHTML(item[0])}</div>
+<div class="vocab-ar">${escapeHTML(item[1])}</div>
+<button class="mic">🔊</button>
+`;
+
+card.querySelector(".mic").onclick=()=>{
+speak(item[0],.8);
+};
+
+grid.appendChild(card);
+
+});
+
+}
+
+
+/* =====================================================
+   CONNECTORS
+===================================================== */
+
+const connectors=[
+["With","مع","My brother is with my father.","أخي مع أبي."],
+["In","في","I am in Morocco.","أنا في المغرب."],
+["On","على / في","The book is on the table.","الكتاب على الطاولة."],
+["At","في / عند","I am at the airport.","أنا في المطار."],
+["From","من","I am from Morocco.","أنا من المغرب."],
+["To","إلى","I am going to university.","أنا ذاهبة إلى الجامعة."],
+["For","من أجل / لـ","This gift is for you.","هذه الهدية لك."],
+["About","عن","We are talking about travel.","نحن نتحدث عن السفر."],
+["Before","قبل","I eat breakfast before university.","آكل الفطور قبل الجامعة."],
+["After","بعد","I study after work.","أدرس بعد العمل."],
+["Because","لأن","I study English because I love languages.","أدرس الإنجليزية لأنني أحب اللغات."],
+["But","لكن","I am tired but happy.","أنا متعبة لكن سعيدة."],
+["And","و","I like tea and coffee.","أحب الشاي والقهوة."],
+["Or","أو","Do you want tea or coffee?","هل تريد الشاي أم القهوة؟"],
+["So","لذلك","I was tired, so I went home.","كنت متعبة، لذلك ذهبت للبيت."],
+["If","إذا","If I have time, I will travel.","إذا كان لدي وقت فسأسافر."],
+["When","عندما","I smile when I am happy.","أبتسم عندما أكون سعيدة."],
+["While","بينما","I listen while I work.","أستمع بينما أعمل."],
+["Although","رغم أن","Although I am tired, I study.","رغم أنني متعبة، أدرس."],
+["Until","حتى","I will wait until you arrive.","سأنتظر حتى تصل."],
+["Also","أيضًا","I also speak French.","أتحدث الفرنسية أيضًا."],
+["Too","أيضًا","I love traveling too.","أنا أيضًا أحب السفر."],
+["However","ومع ذلك","It is difficult. However, I will try.","الأمر صعب، ومع ذلك سأحاول."],
+["Then","ثم","I will study, then I will sleep.","سأدرس، ثم سأنام."],
+["First","أولًا","First, open your book.","أولًا افتح كتابك."],
+["Finally","أخيرًا","Finally, I finished my work.","أخيرًا أنهيت عملي."],
+["For example","على سبيل المثال","I love fruit, for example, apples.","أحب الفواكه، مثلًا التفاح."],
+["Instead","بدلًا من ذلك","I will walk instead.","سأمشي بدلًا من ذلك."],
+["Without","بدون","I cannot live without water.","لا أستطيع العيش بدون ماء."],
+["During","خلال","I study during the evening.","أدرس خلال المساء."]
+];
+
+function renderConnectors(){
+
+const box=document.getElementById("connectorContent");
+
+box.innerHTML="";
+
+connectors.forEach(x=>{
+
+const div=document.createElement("div");
+
+div.className="connector";
+
+div.innerHTML=`
+<div class="connector-word">${escapeHTML(x[0])}</div>
+<div class="connector-ar">${escapeHTML(x[1])}</div>
+<div class="connector-example">${escapeHTML(x[2])}</div>
+<div class="connector-ar">${escapeHTML(x[3])}</div>
+<button class="secondary">🔊 Hear sentence</button>
+`;
+
+div.querySelector("button").onclick=()=>{
+speak(x[2]);
+};
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* =====================================================
+   GRAMMAR TABLES — CLEAN AND COMPLETE
+===================================================== */
+
+const grammarVerbs=[
+{base:"work",ar:"يعمل",past:"worked"},
+{base:"study",ar:"يدرس",past:"studied"},
+{base:"watch",ar:"يشاهد",past:"watched"},
+{base:"play",ar:"يلعب",past:"played"},
+{base:"go",ar:"يذهب",past:"went"},
+{base:"eat",ar:"يأكل",past:"ate"},
+{base:"drink",ar:"يشرب",past:"drank"},
+{base:"write",ar:"يكتب",past:"wrote"},
+{base:"read",ar:"يقرأ",past:"read"},
+{base:"take",ar:"يأخذ",past:"took"},
+{base:"make",ar:"يصنع",past:"made"},
+{base:"see",ar:"يرى",past:"saw"},
+{base:"have",ar:"يملك / لديه",past:"had"},
+{base:"do",ar:"يفعل",past:"did"},
+{base:"try",ar:"يحاول",past:"tried"},
+{base:"carry",ar:"يحمل",past:"carried"},
+{base:"fix",ar:"يصلح",past:"fixed"},
+{base:"wash",ar:"يغسل",past:"washed"},
+{base:"help",ar:"يساعد",past:"helped"},
+{base:"open",ar:"يفتح",past:"opened"}
+];
+
+function renderVerbTables(){
+
+const box=document.getElementById("verbTables");
+
+box.innerHTML="";
+
+grammarVerbs.forEach(v=>{
+
+const wrapper=document.createElement("div");
+
+wrapper.className="tense-title";
+
+wrapper.innerHTML=`
+<h4>${escapeHTML(v.base)} — ${escapeHTML(v.ar)}</h4>
+<span>Present · Past · Future</span>
+`;
+
+box.appendChild(wrapper);
+
+const tableWrap=document.createElement("div");
+
+tableWrap.className="table-wrap";
+
+const table=document.createElement("table");
+
+table.className="tense-table";
+
+table.innerHTML=`
+
+<thead>
+
+<tr>
+<th>Subject</th>
+<th>Present Simple</th>
+<th>Future</th>
+<th>Past Simple</th>
+<th>Negative</th>
+<th>Question</th>
+</tr>
+
+</thead>
+
+<tbody></tbody>
+`;
+
+const tbody=table.querySelector("tbody");
+
+const subjects=[
+"I",
+"You",
+"He",
+"She",
+"It",
+"We",
+"They"
+];
+
+subjects.forEach(s=>{
+
+const third=
+["He","She","It"].includes(s);
+
+const present=
+third
+?conjugatePresent(s,v.base)
+:v.base;
+
+let past=v.past;
+
+if(v.base==="be"){
+past=["I"].includes(s)?"was":
+["He","She","It"].includes(s)?"was":"were";
+}
+
+const negative=
+third
+?"does not "+v.base
+:"do not "+v.base;
+
+const question=
+third
+?"Does "+s.toLowerCase()+" "+v.base+"?"
+:"Do "+s.toLowerCase()+" "+v.base+"?";
+
+const row=document.createElement("tr");
+
+row.innerHTML=`
+
+<td>${s}</td>
+
+<td>${present}</td>
+
+<td>${s} will ${v.base}</td>
+
+<td>${past}</td>
+
+<td>${s} ${negative}</td>
+
+<td>${question}</td>
+
+`;
+
+tbody.appendChild(row);
+
+});
+
+tableWrap.appendChild(table);
+box.appendChild(tableWrap);
+
+});
+
+}
+
+
+/* =====================================================
+   GRAMMAR PRACTICE — 1000
+===================================================== */
+
+function makeGrammarData(){
+
+const arr=[];
+
+for(let i=0;i<1000;i++){
+
+const v=grammarVerbs[i%grammarVerbs.length];
+
+let q;
+let options;
+let correct;
+
+const type=i%10;
+
+if(type===0){
+
+q="She ___ English every day.";
+
+options=[
+v.base,
+conjugatePresent("She",v.base),
+v.past
+];
+
+correct=1;
+
+}else if(type===1){
+
+q="They ___ "+v.base+" yesterday.";
+
+options=[
+v.base,
+"will "+v.base,
+v.past
+];
+
+correct=2;
+
+}else if(type===2){
+
+q="I ___ "+v.base+" tomorrow.";
+
+options=[
+"will "+v.base,
+v.past,
+v.base
+];
+
+correct=0;
+
+}else if(type===3){
+
+q="He ___ "+v.base+" every morning.";
+
+options=[
+v.past,
+conjugatePresent("He",v.base),
+"will "+v.base
+];
+
+correct=1;
+
+}else if(type===4){
+
+q="Yesterday, we ___ "+v.base+".";
+
+options=[
+v.past,
+v.base,
+"will "+v.base
+];
+
+correct=0;
+
+}else if(type===5){
+
+q="Will you ___ "+v.base+" tomorrow?";
+
+options=[
+v.past,
+v.base,
+conjugatePresent("He",v.base)
+];
+
+correct=1;
+
+}else if(type===6){
+
+q="She does not ___ "+v.base+" every day.";
+
+options=[
+conjugatePresent("She",v.base),
+v.base,
+v.past
+];
+
+correct=1;
+
+}else if(type===7){
+
+q="Did they ___ "+v.base+" yesterday?";
+
+options=[
+v.past,
+"will "+v.base,
+v.base
+];
+
+correct=2;
+
+}else if(type===8){
+
+q="He will ___ "+v.base+" tomorrow.";
+
+options=[
+v.past,
+v.base,
+conjugatePresent("He",v.base)
+];
+
+correct=1;
+
+}else{
+
+q="They do not ___ "+v.base+" on Sundays.";
+
+options=[
+conjugatePresent("They",v.base),
+v.past,
+v.base
+];
+
+correct=2;
+
+}
+
+arr.push({
+q,
+options,
+correct
+});
+
+}
+
+return arr;
+}
+
+const grammarData=makeGrammarData();
+
+let grammarIndex=state.progress.grammar;
+
+function renderGrammarQuestion(){
+
+if(grammarIndex>=1000){
+
+document.getElementById("grammarExercise").innerHTML=
+'<div class="complete-box"><h3>🏆 Grammar Complete!</h3><p>You completed all 1000 questions.</p></div>';
+
+return;
+}
+
+const q=grammarData[grammarIndex];
+
+document.getElementById("grammarNumber").textContent=
+grammarIndex+1;
+
+let html=`
+<h3 style="margin-bottom:15px">
+${escapeHTML(q.q)}
+</h3>
+`;
+
+q.options.forEach((x,i)=>{
+
+html+=`
+<button class="quiz-option"
+onclick="answerGrammar(${i})">
+${escapeHTML(x)}
+</button>
+`;
+
+});
+
+document.getElementById("grammarExercise").innerHTML=html;
+
+renderGrammarHistory();
+}
+
+function answerGrammar(index){
+
+const q=grammarData[grammarIndex];
+
+if(index===q.correct){
+
+document.getElementById("grammarExercise").innerHTML=`
+
+<div class="result success">
+
+🎉 Correct!
+
+<br><br>
+
+${escapeHTML(
+q.q.replace("___",q.options[q.correct])
+)}
+
+<br><br>
+
+<button class="primary" onclick="nextGrammar()">
+Save & continue →
+</button>
+
+</div>`;
+
+}else{
+
+document.getElementById("grammarExercise").innerHTML=`
+
+<div class="result error">
+
+❌ Not correct.
+
+<br>
+
+The SAME question will stay until you choose the right form.
+
+<br><br>
+
+<button class="secondary" onclick="renderGrammarQuestion()">
+Try again
+</button>
+
+</div>`;
+
+}
+
+}
+
+function nextGrammar(){
+
+state.progress.grammar=grammarIndex+1;
+
+state.history.grammar.push(
+grammarData[grammarIndex]
+);
+
+grammarIndex++;
+
+addXP(15);
+
+renderGrammarQuestion();
+}
+
+function renderGrammarHistory(){
+
+const box=document.getElementById("grammarHistory");
+
+if(!state.history.grammar.length){
+
+box.innerHTML=
+'<div class="history-empty">Completed grammar questions will appear here.</div>';
+
+return;
+}
+
+box.innerHTML="";
+
+state.history.grammar.slice(-12).forEach(x=>{
+
+box.innerHTML+=`
+<div class="result success" style="margin-top:8px">
+✓ ${escapeHTML(
+x.q.replace("___",x.options[x.correct])
+)}
+</div>
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   CONVERSATION STORIES — 1000
+===================================================== */
+
+const conversationScenarios=[
+{
+alex:"Hey! How are you today?",
+answers:[
+"I’m doing well, thank you.",
+"I went to the airport yesterday.",
+"I don't like English."
+]
+},
+{
+alex:"What are you doing this weekend?",
+answers:[
+"I’m going to visit my friend.",
+"I was tired yesterday.",
+"English is difficult."
+]
+},
+{
+alex:"Do you study English every day?",
+answers:[
+"Yes, I try to practice every day.",
+"I went there last year.",
+"I am from Morocco."
+]
+},
+{
+alex:"Why are you learning English?",
+answers:[
+"Because I want to communicate more confidently.",
+"I bought a new bag.",
+"Yesterday was Monday."
+]
+},
+{
+alex:"Where would you like to travel?",
+answers:[
+"I would like to visit the United States.",
+"I am studying grammar.",
+"I ate breakfast."
+]
+},
+{
+alex:"What did you do yesterday?",
+answers:[
+"I studied and worked.",
+"I will travel tomorrow.",
+"I am happy today."
+]
+},
+{
+alex:"What will you do tomorrow?",
+answers:[
+"I will go to university.",
+"I went to university yesterday.",
+"I am from Morocco."
+]
+},
+{
+alex:"What do you usually do in the evening?",
+answers:[
+"I usually study and relax.",
+"I traveled last year.",
+"I will buy a ticket."
+]
+},
+{
+alex:"Have you ever visited another country?",
+answers:[
+"Yes, I have visited another country.",
+"I am studying now.",
+"I will cook dinner."
+]
+},
+{
+alex:"What is one goal you have this year?",
+answers:[
+"I want to improve my English.",
+"I bought coffee yesterday.",
+"I am sitting here."
+]
+}
+];
+
+function makeStories(){
+
+const arr=[];
+
+for(let i=0;i<1000;i++){
+
+const s=conversationScenarios[i%conversationScenarios.length];
+
+const round=Math.floor(i/conversationScenarios.length)+1;
+
+arr.push({
+alex:s.alex+"",
+answers:[
+s.answers[0],
+s.answers[1],
+s.answers[2]
+],
+correct:0,
+round
+});
+
+}
+
+return arr;
+}
+
+const storyData=makeStories();
+
+let storyIndex=state.progress.stories;
+
+function renderStory(){
+
+if(storyIndex>=1000){
+
+document.getElementById("storyDialogue").innerHTML=
+'<div class="complete-box"><h3>🏆 Conversation Complete!</h3><p>You completed all 1000 conversation turns.</p></div>';
+
+return;
+}
+
+const s=storyData[storyIndex];
+
+document.getElementById("storyNumber").textContent=
+storyIndex+1;
+
+let html=`
+
+<div class="result">
+
+👨 <b>Alex:</b><br>
+${escapeHTML(s.alex)}
+
+</div>
+
+<p style="margin:18px 0;font-weight:800">
+What would you say?
+</p>
+`;
+
+s.answers.forEach((answer,i)=>{
+
+html+=`
+
+<button class="quiz-option"
+onclick="storyAnswer(${i})">
+
+${escapeHTML(answer)}
+
+</button>
+
+`;
+
+});
+
+document.getElementById("storyDialogue").innerHTML=html;
+
+renderStoryHistory();
+}
+
+function storyAnswer(index){
+
+const s=storyData[storyIndex];
+
+if(index===s.correct){
+
+document.getElementById("storyDialogue").innerHTML=`
+
+<div class="result success">
+
+🎉 Excellent response!
+
+<br><br>
+
+👨 Alex:
+${escapeHTML(s.alex)}
+
+<br><br>
+
+🗣️ You:
+${escapeHTML(s.answers[index])}
+
+<br><br>
+
+<button class="primary" onclick="nextStory()">
+Save & continue →
+</button>
+
+</div>`;
+
+}else{
+
+document.getElementById("storyDialogue").innerHTML=`
+
+<div class="result error">
+
+❌ That answer does not fit the conversation naturally.
+
+<br><br>
+
+Read Alex's sentence again and choose the appropriate response.
+
+<br><br>
+
+<button class="secondary" onclick="renderStory()">
+Try again
+</button>
+
+</div>`;
+
+}
+
+}
+
+function nextStory(){
+
+state.progress.stories=storyIndex+1;
+
+state.history.stories.push(
+storyData[storyIndex]
+);
+
+storyIndex++;
+
+addXP(25);
+
+renderStory();
+}
+
+function renderStoryHistory(){
+
+const box=document.getElementById("storyHistory");
+
+if(!state.history.stories.length){
+
+box.innerHTML=
+'<div class="history-empty">Completed conversation turns will appear here.</div>';
+
+return;
+}
+
+box.innerHTML="";
+
+state.history.stories.slice(-10).forEach(x=>{
+
+box.innerHTML+=`
+
+<div class="result success" style="margin-top:8px">
+
+👨 ${escapeHTML(x.alex)}
+
+<br><br>
+
+🗣️ ${escapeHTML(x.answers[0])}
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+renderThink();
+
+renderSpeak();
+
+renderListening();
+
+renderReading();
+
+renderWriting();
+
+renderBuilder();
+
+renderVocabularyCategories();
+
+renderConnectors();
+
+renderVerbTables();
+
+renderGrammarQuestion();
+
+renderStory();
+
+updateStats();
+
+</script>
+
+</body>
+</html>
+
+<dlink rel="icon" type="image/jpeg" href="IMG_0453.jpeg">
+<link rel="apple-touch-icon" href="IMG_0453.jpeg">
